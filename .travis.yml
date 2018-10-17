@@ -8,6 +8,6 @@ before_script:
 script:
   - cmake ../381706-1-Karin-AllLabs
   - make -j
-  - ./Vector
+  - ./Vector/Vector
 notifications:
   email: false
