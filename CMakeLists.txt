@@ -18,4 +18,5 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib ${CMAKE_CURRENT_SOURCE
 add_subdirectory(Vector) #Собираем проект в поддиректории lib1
 add_subdirectory(VectorLib)
 add_subdirectory(VectorTest)
+add_subdirectory(gtest)
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
