@@ -4,8 +4,8 @@ using namespace std;
 template <class T>
 class TVector {
 protected:
-	int l; // длина(размерность)
-	T* m; //массив
+	int l; // Г¤Г«ГЁГ­Г (Г°Г Г§Г¬ГҐГ°Г­Г®Г±ГІГј)
+	T* m; //Г¬Г Г±Г±ГЁГў
 public:
 	TVector<T>	(int n = 0);
 	TVector<T>(TVector <T> &A);
@@ -15,10 +15,10 @@ public:
 	TVector<T> operator-(TVector<T> &A);
 	T operator*(TVector<T> &A);
 	virtual ~TVector();
-	template <class T>
-	friend ostream& operator<< (ostream& ostr, const TVector<T> &A);
-	template <class T>
-	friend istream& operator>> (istream& istr, TVector<T> &A);
+	template <class T1>
+	friend ostream& operator<< (ostream& ostr, const TVector<T1> &A);
+	template <class T1>
+	friend istream& operator>> (istream& istr, TVector<T1> &A);
 };
 
 template <class T>
@@ -110,16 +110,16 @@ TVector<T>::~TVector() {
 	m = nullptr;
 }
 
-template <class T> 
-ostream& operator<< (ostream& ostr, const TVector<T> &A) {
+template <class T1> 
+ostream& operator<< (ostream& ostr, const TVector<T1> &A) {
 	for (int i = 0; i < A.l; i++) {
 		ostr << A.m[i] << endl;
 	}
 	return ostr;
 }
 
-template <class T>
-istream& operator>> (istream& istr, TVector<T> &A) {
+template <class T1>
+istream& operator>> (istream& istr, TVector<T1> &A) {
 	for (int i = 0; i < A.l; i++) {
 		istr >> A.m[i];
 	}
