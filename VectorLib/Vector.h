@@ -10,15 +10,16 @@ public:
 	TVector<T>	(int n = 0);
 	TVector<T>(TVector <T> &A);
 	TVector<T>& operator=(TVector<T> &A);
-	T& operator[](int A);
+	bool operator==(TVector &A);
+	T& operator[](int i);
 	TVector<T> operator+(TVector<T> &A);
 	TVector<T> operator-(TVector<T> &A);
 	T operator*(TVector<T> &A);
 	virtual ~TVector();
-	template <class T>
-	friend ostream& operator<< (ostream& ostr, const TVector<T> &A);
-	template <class T>
-	friend istream& operator>> (istream& istr, TVector<T> &A);
+	template <class T1>
+	friend ostream& operator<< (ostream& ostr, const TVector<T1> &A);
+	template <class T1>
+	friend istream& operator>> (istream& istr, TVector<T1> &A);
 };
 
 template <class T>
@@ -35,22 +36,26 @@ TVector<T>::TVector(int n) {
 
 template <class T>
 TVector<T>::TVector(TVector <T> &A) {
-	TVector<T> N(A.l);
-	N.l = A.l;
-	for (int i = 0; i < N.l; i++) {
-		N.l = A.l;
+	l = A.l;
+	if (l == 0)
+		m = nullptr;
+	else {
+		m = new T [l];
+		for (int i = 0; i < l; i++)
+			m[i] = A.m[i];
 	}
 }
 
 template <class T>
 TVector<T>& TVector<T> :: operator=(TVector<T> &A) {
-	if (this = &A) {
+	if (this == &A) {
 		return *this;
 	}
 
 	if (l != A.l) {
 		delete[] m;
-		m = new <T>[A.l];
+		m = new T [A.l];
+		l = A.l;
 	}
 
 	for (int i = 0; i < l; i++) {
@@ -59,12 +64,24 @@ TVector<T>& TVector<T> :: operator=(TVector<T> &A) {
 	return *this;
 
 }
+
 template <class T>
-T& TVector<T> :: operator[](int A) {
-	if ((A < 0) || (A > l)) {
+bool TVector<T>::operator==(TVector<T> &A) {
+	if (l != A.l)
+		return false;
+	for (int i = 0; i < l; i++) {
+		if (m[i] != A.m[i])
+			return false;
+	}
+	return true;
+}
+
+template <class T>
+T& TVector<T> :: operator[](int i) {
+	if ((i < 0) || (i > l)) {
 		throw "Element doesn't exist";
 	}
-	return A.m[i];
+	return m[i];
 }
 
 template <class T>
@@ -90,6 +107,7 @@ TVector<T> TVector<T> :: operator-(TVector<T> &A) {
 	}
 	return B;
 }
+
 template <class T>
 T TVector<T> :: operator*(TVector<T> &A) {
 	if (l != A.l) {
@@ -110,16 +128,16 @@ TVector<T>::~TVector() {
 	m = nullptr;
 }
 
-template <class T> 
-ostream& operator<< (ostream& ostr, const TVector<T> &A) {
+template <class T1> 
+ostream& operator<< (ostream& ostr, const TVector<T1> &A) {
 	for (int i = 0; i < A.l; i++) {
 		ostr << A.m[i] << endl;
 	}
 	return ostr;
 }
 
-template <class T>
-istream& operator>> (istream& istr, TVector<T> &A) {
+template <class T1>
+istream& operator>> (istream& istr, TVector<T1> &A) {
 	for (int i = 0; i < A.l; i++) {
 		istr >> A.m[i];
 	}
