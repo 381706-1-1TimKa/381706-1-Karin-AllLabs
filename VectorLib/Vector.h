@@ -7,8 +7,8 @@ protected:
 	int l; // длина(размерность)
 	T* m; //массив
 public:
-	TVector<T>	(int n = 0);
-	TVector<T>(TVector <T> &A);
+	TVector	(int n = 0);
+	TVector (TVector <T> &A);
 	TVector<T>& operator=(TVector<T> &A);
 	bool operator==(TVector &A);
 	T& operator[](int i);
@@ -30,7 +30,7 @@ TVector<T>::TVector(int n) {
 	l = n;
 	m = new T[l];
 	for (int i = 0; i < l; i++) {
-		m[i] = 0;
+		m[i] = (T)0;
 	}
 }
 

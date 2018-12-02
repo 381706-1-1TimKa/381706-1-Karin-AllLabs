@@ -18,7 +18,7 @@ public:
 };
 
 template <class T>
-TStack<T>::TStack<T>(int n){
+TStack<T>::TStack(int n){
 	if (n < 0)
 		throw "Incorrect length";
 	else if (n == 0) {
@@ -34,7 +34,7 @@ TStack<T>::TStack<T>(int n){
 }
 
 template <class T>
-TStack<T>::TStack<T>(TStack<T> &A) {
+TStack<T>::TStack(TStack<T> &A) {
 	r = A.r;
 	size = A.size;
 	if (size == 0)

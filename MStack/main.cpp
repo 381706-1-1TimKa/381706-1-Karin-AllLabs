@@ -1,11 +1,10 @@
 #include <iostream>
-#include "Vector.h"
-#include "Matrix.h"
+#include "MStack.h"
 using namespace std;
 
 int main()
 {
-	TMatrix<int> A(3);
+	TMStack<int> A(3, 12);
+	TMStack<int> B(A);
 	return 0;
-
 }
