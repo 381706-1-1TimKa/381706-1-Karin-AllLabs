@@ -6,7 +6,7 @@ template <class T>
 class TStack {
 protected:
 	int size;
-	int r;
+	int top;
 	T* mas;
 public:
 	TStack<T> (int n=0);
@@ -23,19 +23,19 @@ TStack<T>::TStack(int n){
 		throw "Incorrect length";
 	else if (n == 0) {
 		size = 0;
-		r = 0;
+		top = 0;
 		mas = nullptr;
 	}
 	else {
 		size = n;
-		r = 0;
+		top = 0;
 		mas = new T[size];
 	}
 }
 
 template <class T>
 TStack<T>::TStack(TStack<T> &A) {
-	r = A.r;
+	top = A.top;
 	size = A.size;
 	if (size == 0)
 		mas = 0;
@@ -50,10 +50,8 @@ template <class T>
 void TStack<T>::put(T A) {
 	if (IsFull())
 		throw "FULL";
-	else {
-		mas[r] = A;
-		r++;
-	}
+	mas[top] = A;
+	top++;
 }
 
 template <class T>
@@ -61,14 +59,14 @@ T TStack<T>::Get(){
 	if (IsEmpty())
 		throw "Empty";
 	else {
-		r--;
-		return mas[r];
+		top--;
+		return mas[top];
 	}
 }
 
 template <class T>
 bool TStack<T>::IsFull() {
-	if (r >= size)
+	if (top >= size)
 		return true;
 	else
 		return false;
@@ -76,7 +74,7 @@ bool TStack<T>::IsFull() {
 
 template <class T>
 bool TStack<T>::IsEmpty(){
-	if (r == 0)
+	if (top == 0)
 		return true;
 	else
 		return false;

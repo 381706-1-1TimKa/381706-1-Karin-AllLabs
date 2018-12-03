@@ -13,6 +13,8 @@ public:
 	TMatrix<T> operator-(TMatrix& A);
 	TMatrix<T> operator*(TMatrix& A);
 	TMatrix(TVector<TVector<T>> &A);
+	template <class T1>
+	friend ostream& operator<<(ostream& ostr, TMatrix<T1> &A);
 };
 
 template <class T>
@@ -60,3 +62,15 @@ TMatrix<T>::TMatrix(TVector<TVector<T> > &A) : TVector<TVector<T>>(A) {};
 //	else
 //		m[row][col] = val;
 //}
+
+template <class T1>
+ostream& operator<<(ostream& ostr, TMatrix<T1> &A) {
+	for (int i = 0; i < A.l; i++) {
+		for (int j = 0; j < i; j++)
+			ostr << "0\t";
+		for (int k = 0; k < A.l - i; k++)
+			ostr << A.m[i][k] << "\t";
+		ostr << endl;
+	}
+	return ostr;
+}

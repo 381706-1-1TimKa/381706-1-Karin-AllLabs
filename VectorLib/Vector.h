@@ -91,7 +91,7 @@ TVector<T> TVector<T> :: operator+(TVector<T> &A) {
 	}
 	TVector<T> B(*this);
 	for (int i = 0; i < B.l; i++) {
-		B.m[i] += A.m[i];
+		B.m[i] = B.m[i] + A.m[i];
 	}
 	return B;
 }
@@ -103,7 +103,7 @@ TVector<T> TVector<T> :: operator-(TVector<T> &A) {
 	}
 	TVector<T> B(*this);
 	for (int i = 0; i < B.l; i++) {
-		B.m[i] -= A.m[i];
+		B.m[i] = B.m[i] - A.m[i];
 	}
 	return B;
 }
