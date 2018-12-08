@@ -54,7 +54,8 @@ TVector<T>& TVector<T> :: operator=(TVector<T> &A) {
 
 	if (l != A.l) {
 		delete[] m;
-		m = new T [A.l];
+		if (A.l>0)
+			m = new T [A.l];
 		l = A.l;
 	}
 

@@ -11,8 +11,9 @@ protected:
 public:
 	TStack<T> (int n=0);
 	TStack<T> (TStack<T> &A);
-	void put (T A);
+	void Put (T A);
 	T Get();
+	int GetSize();
 	bool IsFull();
 	bool IsEmpty();
 };
@@ -47,7 +48,7 @@ TStack<T>::TStack(TStack<T> &A) {
 }
 
 template <class T>
-void TStack<T>::put(T A) {
+void TStack<T>::Put(T A) {
 	if (IsFull())
 		throw "FULL";
 	mas[top] = A;
@@ -62,6 +63,11 @@ T TStack<T>::Get(){
 		top--;
 		return mas[top];
 	}
+}
+
+template <class T>
+int TStack<T>::GetSize() {
+	return size;
 }
 
 template <class T>

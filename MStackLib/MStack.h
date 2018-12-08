@@ -14,7 +14,7 @@ public:
 	TMStack(TMStack<T> &A);
 	int GetFreeMem();
 	void Repack(int k);
-	void Set(int n1, T p);
+	void Put(int n1, T p);
 	T Get(int n1);
 	bool IsFull(int n1);
 	bool IsEmpty(int n1);
@@ -39,6 +39,7 @@ TMStack<T>::TMStack(int _n, int _size)
 	h[0] = new TNewStack<T>(p[0], &mas[0]);
 	for (int i = 1; i < n; i++)
 		h[i] = new TNewStack<T>(p[i], &mas[p[0]] + ((i - 1)*p[i]));
+	delete[] p;
 }
 
 template <class T>
@@ -70,7 +71,7 @@ int TMStack<T>::GetFreeMem()
 {
 	int count = 0;
 	for (int i = 0; i < n; i++)
-		count += h[i]->GetFreeMem();
+		count += h[i]->Free();
 	return count;
 }
 
@@ -80,8 +81,8 @@ void TMStack<T>::Repack(int k)
 	int freeMem = GetFreeMem();
 	if (freeMem == 0)
 		throw "No free memory";
-	int addEv = FM / n;
-	int addFull = FM % n;
+	int addEv = freeMem / n;
+	int addFull = freeMem % n;
 	int* newSize = new int[n];
 	T** oldStart = new T*[n];
 	T** newStart = new T*[n];
@@ -101,7 +102,8 @@ void TMStack<T>::Repack(int k)
 				newStart[i][j] = oldStart[i][j];
 		}
 		else {
-			for (int s = i + 1; s < n; s++)
+			int s = i + 1;
+			for (s = i + 1; s < n; s++)
 				if (newStart[s] <= oldStart[s])
 					break;
 			for (int j = s - 1; j > i; j--) {
@@ -112,24 +114,26 @@ void TMStack<T>::Repack(int k)
 		}
 	}
 	for (int i = 0; i < n; i++)
-		h[i]->TNewStack<T>::SetMas(NewSize[i], newStart[i]);
+		h[i]->TNewStack<T>::SetMas(newSize[i], newStart[i]);
 	delete[] newStart;
 	delete[] oldStart;
 	delete[] newSize;
 }
 
 template <class T>
-void TMStack<T>::Set(int n1, T p) 
+void TMStack<T>::Put(int n1, T p) 
 {
-	if ((n1 < 0) || (n1 > n))
+	if ((n1 < 0) || (n1 >= n))
 		throw 1;
-	h[n1]->TStack<T>::Set(p);
+	if (IsFull(n1))
+			Repack(n1);
+	h[n1]->TStack<T>::Put(p);
 }
 
 template <class T>
 T TMStack<T>::Get(int n1) 
 {
-	if ((n1 < 0) || (n1 > n))
+	if ((n1 < 0) || (n1 >= n))
 		throw 1;
 	return h[n1]->TStack<T>::Get();
 }
@@ -137,7 +141,7 @@ T TMStack<T>::Get(int n1)
 template <class T>
 bool TMStack<T>::IsFull(int n1) 
 {
-	if ((n1 < 0) || (n1 > n))
+	if ((n1 < 0) || (n1 >= n))
 		throw 1;
 	return h[n1]->TStack<T>::IsFull();
 }

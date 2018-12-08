@@ -57,7 +57,7 @@ void TList<T>::PutEnd(T A){
 		a->SetNext(new TElem<T>(A, 0));
 	}
 	else {
-		begin = new TElem(A, 0);
+		begin = new TElem<T>(A, 0);
 	}
 }
 
@@ -72,14 +72,27 @@ T TList<T>::GetBegin(){
 
 template <class T>
 T TList<T>::GetEnd(){
-
+	TElem<T>* a;
+	a = begin;
+	while ((a->GetNext() != 0) && (a->GetNext() != nullptr))
+		a=a->GetNext();
+	T tmp = a->Get();
+	a->SetNext(0);
+	return tmp;
 }
 
 template <class T>
 T TList<T>::GetElem(T* A){
 }
 
-template <class T>
-T* TList<T>::GetInd(T A){
-
-}
+//template <class T>
+//T* TList<T>::GetInd(T A){
+//	TElem<T>* a = begin;
+//	int i = 0;
+//	while (*(a->GetNext()) != A) {
+//		if (a->GetNext() != 0) && (a->GetNext() != nullptr)
+//			throw 1;
+//		a = a->GetNext();
+//	}
+//	return 
+//}

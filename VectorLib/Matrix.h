@@ -2,25 +2,28 @@
 #include "Vector.h"
 #include <iostream>
 using namespace std;
-
+//Для удобства обращения (индексации) и вывода матрицы сделаны нижнетреугольными
 template <class T>
 class TMatrix: public TVector<TVector<T>>
 {
 public:
 	TMatrix (int n=0);
 	TMatrix (const TMatrix<T>& A);
-	TMatrix<T> operator+(TMatrix& A);
-	TMatrix<T> operator-(TMatrix& A);
-	TMatrix<T> operator*(TMatrix& A);
+	TMatrix<T> operator+(TMatrix<T>& A);
+	TMatrix<T> operator-(TMatrix<T>& A);
+	TMatrix<T>& operator*(TMatrix<T>& A);
 	TMatrix(TVector<TVector<T>> &A);
+	TMatrix<T>& operator=(TMatrix<T>& A);
 	template <class T1>
 	friend ostream& operator<<(ostream& ostr, TMatrix<T1> &A);
+	template <class T1>
+	friend istream& operator>>(istream& istr, TMatrix<T1> &A);
 };
 
 template <class T>
 TMatrix<T>::TMatrix (int n):TVector<TVector<T>>(n) {
 	for (int i = 0; i < n; i++) {
-		m[i] = TVector<T>(l - i);
+		m[i] = TVector<T>(i+1);
 	}
 }
 
@@ -28,6 +31,16 @@ template <class T>
 TMatrix<T>::TMatrix(const TMatrix<T>& A):TVector<TVector<T>>(A) {
 	
 }
+//TMatrix<T>::TMatrix (const TMatrix<T>& A){
+//	l = A.l;
+//	if (A.l > 0) {
+//		for (int i = 0; i < l; i++) {
+//			m[i] = TVector<T>(i + 1);
+//			for (int j = 0; j < i + 1; j++)
+//				m[i][j] = A.m[i][j];
+//		}
+//	}
+//}
 
 template <class T>
 TMatrix<T> TMatrix<T>::operator+(TMatrix<T> &A) {
@@ -35,13 +48,45 @@ TMatrix<T> TMatrix<T>::operator+(TMatrix<T> &A) {
 }
 
 template <class T>
-TMatrix<T> TMatrix<T>::operator-(TMatrix& A) {
+TMatrix<T> TMatrix<T>::operator-(TMatrix<T>& A) {
 	return TVector<TVector<T>>::operator-(A);
 }
 
 template <class T>
-TMatrix<T> TMatrix<T>::operator*(TMatrix& A) {
+TMatrix<T>& TMatrix<T>::operator*(TMatrix<T>& A) {
+	if (l != A.l)
+		throw 1;
+	TMatrix<T> tmp(l);
+	int sum = 0;
+	for (int i = 0; i < l; i++) {
+		for (int j = 0; j <= i; j++) {
+			for (int k = 0; k < i - j + 1; k++)
+				sum += m[i][k + j] * A.m[k + j][j];
+			tmp.m[i][j] = sum;
+			sum = 0;
+		}
+	}
+	return tmp;
+}
 
+template <class T>
+TMatrix<T>& TMatrix<T>::operator=(TMatrix<T>& A) {
+	if (this == &A)
+		return *this;
+	if (l != A.l) {
+		for (int i=0; i<l; i++)
+			delete[] m[i];
+		delete[] m;
+		l = A.l;
+		m = new TVector<T>[A.l];
+		for (int i = 0; i < l; i++) {
+			m[i] = TVector<T>(i + 1);
+		}
+	}
+	for (int i = 0; i < l; i++)
+		for (int j = 0; j < i + 1; j++)
+			m[i][j] = A.m[i][j];
+	return *this;
 }
 
 template <class T>
@@ -66,11 +111,20 @@ TMatrix<T>::TMatrix(TVector<TVector<T> > &A) : TVector<TVector<T>>(A) {};
 template <class T1>
 ostream& operator<<(ostream& ostr, TMatrix<T1> &A) {
 	for (int i = 0; i < A.l; i++) {
-		for (int j = 0; j < i; j++)
+		for (int j = 0; j <= i; j++) {
+			ostr << A.m[i][j] << "\t";
+		}
+		for (int k = 0; k < A.l - i - 1; k++)
 			ostr << "0\t";
-		for (int k = 0; k < A.l - i; k++)
-			ostr << A.m[i][k] << "\t";
 		ostr << endl;
 	}
 	return ostr;
+}
+
+template <class T1>
+istream& operator>>(istream& istr, TMatrix<T1> &A) {
+	for (int i = 0; i < A.l; i++)
+		for (int j = 0; j <= i; j++)
+			istr >> A.m[i][j];
+	return istr;
 }
