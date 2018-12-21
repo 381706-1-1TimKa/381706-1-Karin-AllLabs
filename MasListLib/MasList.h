@@ -1,5 +1,6 @@
 #pragma once
 #include <queue>
+#include "Exeption.h"
 using namespace std;
 
 template <class T>
@@ -27,8 +28,10 @@ public:
 template <class T>
 TMasList<T>::TMasList(int _size)
 {
-	if (_size <= 0)
-		throw 1;
+	if (_size <= 0) {
+		TExeption Ex("negative size", "MasList.h", "TMasList(int _size)", 1);
+		throw Ex;
+	}
 	size = _size;
 	count = 0;
 	start = -1;
@@ -44,7 +47,7 @@ TMasList<T>::TMasList(int _size)
 }
 
 template <class T>
-TMasList<T>::TMasList(TMasList<T> &A)
+TMasList<T>::TMasList(TMasList<T> &A):freeElem(A.freeElem)
 {
 	start = A.start;
 	finish = A.finish;
@@ -53,7 +56,6 @@ TMasList<T>::TMasList(TMasList<T> &A)
 	mas = new T[size];
 	nextInd = new int[size];
 	prevInd = new int[size];
-	freeElem = A.freeElem;
 	for (int i = 0; i < size; i++) {
 		mas[i] = A.mas[i];
 		nextInd[i] = A.nextInd[i];
@@ -64,8 +66,10 @@ TMasList<T>::TMasList(TMasList<T> &A)
 template <class T>
 void TMasList<T>::PushStart(T elem)	//положить элемент в начало
 {
-	if (IsFull() == 1)
-		throw 1;
+	if (IsFull() == 1) {
+		TExeption Ex("Full list", "MasList.h", "PushStart", 2);
+		throw Ex;
+	}
 	int ifree = freeElem.front();
 	freeElem.pop();
 	mas[ifree] = elem;
@@ -81,8 +85,10 @@ void TMasList<T>::PushStart(T elem)	//положить элемент в начало
 template <class T>
 void TMasList<T>::PushFinish(T elem)	//положить элемент в конец
 {
-	if(IsFull() == 1)
-		throw 1;
+	if (IsFull() == 1) {
+		TExeption Ex("Full list", "MasList.h", "PushFinish", 2);
+		throw Ex;
+	}
 	int ifree = freeElem.front();
 	freeElem.pop();
 	mas[ifree] = elem;
@@ -100,15 +106,19 @@ void TMasList<T>::PushFinish(T elem)	//положить элемент в конец
 template <class T>
 T TMasList<T>::PullStart()	//взять первый элемент
 {
-	if (IsEmpty() == 1)
-		throw 1;
+	if (IsEmpty() == 1) {
+		TExeption Ex("Empty list", "MasList.h", "PullStart", 3);
+		throw Ex;
+	}
 	T elem = mas[start];
 	int newstart = nextInd[start];
 	freeElem.push(start);
 	nextInd[start] = -2;
 	prevInd[start] = -2;
-	if(newstart!=-1)
+	if (newstart != -1)
 		prevInd[newstart] = -1;
+	else
+		finish = -1;
 	count--;
 	start = newstart;
 	return elem;
@@ -117,8 +127,10 @@ T TMasList<T>::PullStart()	//взять первый элемент
 template <class T>
 T TMasList<T>::PullFinish()		//взять последний элемент
 {
-	if (IsEmpty() == 1)
-		throw 1;
+	if (IsEmpty() == 1){
+		TExeption Ex("Empty list", "MasList.h", "PullFinish", 3);
+		throw Ex;
+}
 	T elem = mas[finish];
 	int newFinish = prevInd[finish];
 	prevInd[finish] = -2;

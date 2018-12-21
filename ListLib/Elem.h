@@ -1,4 +1,7 @@
 #pragma once
+#include "Exeption.h"
+using namespace std;
+
 
 
 template <class T>

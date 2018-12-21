@@ -1,32 +1,22 @@
 #include <iostream>
-#include "Stack.h"
-//#define _IO_EXAMPLE_
+#include "StackList.h"
+#define _IO_EXAMPLE_
 using namespace std;
 
-void Print(TStack<int> A);
+void Print(TStackList<int> A);
 int main()
 {
-	cout << "Let's create Stack" << endl;
-	cout << "Enter size of your stack" << endl;
-
-	int n;
-#ifdef _IO_EXAMPLE_
-	cin >> n;
-#endif
-#ifndef _IO_EXAMPLE_
-	n = 10;
-#endif
-	TStack <int> S(n);
+	cout << "Let's create Stack on List" << endl;
+	TStackList <int> S;
 
 #ifdef _IO_EXAMPLE_
 	while (1) {
 		cout << "What you want to do" << endl;
 		cout << "1) Put" << endl;
 		cout << "2) Get" << endl;
-		cout << "3) Check for full" << endl;
-		cout << "4) Check for Empty" << endl;
-		cout << "5) Print" << endl;
-		cout << "6) Exit" << endl;
+		cout << "3) Check for Empty" << endl;
+		cout << "4) Print" << endl;
+		cout << "5) Exit" << endl;
 		int n;
 		cin >> n;
 		switch (n) {
@@ -41,21 +31,15 @@ int main()
 			cout << S.Get() << endl;
 			break;
 		case 3:
-			if (S.IsFull())
-				cout << "True. Stack is full" << endl;
-			else
-				cout << "False. Stack isn't full" << endl;
-			break;
-		case 4:
 			if (S.IsEmpty())
 				cout << "True. Stack is empty" << endl;
 			else
 				cout << "False. Stack isn't empty" << endl;
 			break;
-		case 5:
+		case 4:
 			Print(S);
 			break;
-		case 6:
+		case 5:
 			return 0;
 		default:
 			cout << "Incorrect value" << endl;
@@ -84,14 +68,14 @@ int main()
 #endif
 }
 
-void Print(TStack<int> S) {
-	TStack<int> S1(S.GetSize());
+void Print(TStackList<int> S) {
+	TStackList<int> S1;
 	while (!(S.IsEmpty())) {
 		int a = S.Get();
 		S1.Put(a);
 		cout << a << " ";
 	}
-		cout << endl;
+	cout << endl;
 	while (!(S1.IsEmpty()))
 		S.Put(S1.Get());
 }

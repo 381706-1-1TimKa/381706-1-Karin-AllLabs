@@ -1,5 +1,8 @@
 #pragma once
 #include "Elem.h"
+#include "Exeption.h"
+using namespace std;
+
 template <class T>
 class TList {
 protected:
@@ -11,8 +14,8 @@ public:
 	void PutEnd(T A);
 	T GetBegin();
 	T GetEnd();
-	T GetElem(T* A);
-	T* GetInd(T A);
+	//T GetElem(T* A);
+	//T* GetInd(T A);
 };
 
 template <class T>
@@ -22,15 +25,17 @@ TList<T>::TList(){
 
 template <class T>
 TList<T>::TList(TList<T> &A) {
-	TElem<T>* a, b;
+	TElem<T> *a, *b;
 	a = A.begin;
 	if (A.begin == 0)
 		begin = 0;
 	else {
-		begin = new TElem<T>(A.begin);
+		begin = new TElem<T>(*A.begin);
 		b = begin;
 		while (a->GetNext() != 0) {
-			b.next = new TElem<T>(a->GetNext());
+			b->SetNext(new TElem<T> (*(a->GetNext())) );
+			a = a->GetNext();
+			b = b->GetNext();
 		}
 	}
 }
@@ -73,17 +78,29 @@ T TList<T>::GetBegin(){
 template <class T>
 T TList<T>::GetEnd(){
 	TElem<T>* a;
-	a = begin;
-	while ((a->GetNext() != 0) && (a->GetNext() != nullptr))
-		a=a->GetNext();
-	T tmp = a->Get();
-	a->SetNext(0);
+	T tmp;
+	if ((begin->GetNext() != 0) && (begin->GetNext() != nullptr)) {
+		a = begin;
+		while ((a->GetNext()->GetNext() != 0) && (a->GetNext()->GetNext() != nullptr))
+			a = a->GetNext();
+		tmp = a->GetNext()->Get();
+		a->SetNext(0);
+		delete[] a->GetNext();
+	}
+
+	else if ((begin->GetNext() == 0) || (begin->GetNext() == nullptr)) {
+		tmp = begin->Get();
+		begin = 0;
+	}
+	else
+		throw 1;
+
 	return tmp;
 }
 
-template <class T>
-T TList<T>::GetElem(T* A){
-}
+//template <class T>
+//T TList<T>::GetElem(T* A){
+//}
 
 //template <class T>
 //T* TList<T>::GetInd(T A){

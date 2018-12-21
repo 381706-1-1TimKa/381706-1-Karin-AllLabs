@@ -19,6 +19,10 @@ set (List List)
 set (ListLib ListLib)
 set (ListTest ListTest)
 
+set (StOnList StOnList)
+set (StOnListLib StOnListLib)
+set (StOnListTest StOnListTest)
+
 set (MStack MStack)
 set (MStackLib MStackLib)
 set (MStackTest MStackTest)
@@ -31,6 +35,10 @@ set (Polinom Polinom)
 set (PolinomLib PolinomLib)
 set (PolinomTest PolinomTest)
 
+set (RPN RPN)
+set (RPNLib RPNLib)
+set (RPNTest RPNTest)
+
 set (Exeption Exeption)
 
 
@@ -41,7 +49,7 @@ endif()
 
 
  #Создаем проект с именем из переменной ${PROJECT_NAME}, в него добавляются файлы из переменных ${srcs} и ${hdrs}
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib ${CMAKE_CURRENT_SOURCE_DIR}/StackLib ${CMAKE_CURRENT_SOURCE_DIR}/QueueLib ${CMAKE_CURRENT_SOURCE_DIR}/ListLib ${CMAKE_CURRENT_SOURCE_DIR}/MStackLib ${CMAKE_CURRENT_SOURCE_DIR}/MasListLib ${CMAKE_CURRENT_SOURCE_DIR}/PolinomLib ${CMAKE_CURRENT_SOURCE_DIR}/Exeption ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib ${CMAKE_CURRENT_SOURCE_DIR}/StackLib ${CMAKE_CURRENT_SOURCE_DIR}/QueueLib ${CMAKE_CURRENT_SOURCE_DIR}/ListLib ${CMAKE_CURRENT_SOURCE_DIR}/StOnListLib ${CMAKE_CURRENT_SOURCE_DIR}/MStackLib ${CMAKE_CURRENT_SOURCE_DIR}/MasListLib ${CMAKE_CURRENT_SOURCE_DIR}/PolinomLib ${CMAKE_CURRENT_SOURCE_DIR}/RPNLib ${CMAKE_CURRENT_SOURCE_DIR}/Exeption ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 add_subdirectory(Vector) #Собираем проект в поддиректории lib1
 add_subdirectory(VectorLib)
 add_subdirectory(VectorTest)
@@ -58,6 +66,10 @@ add_subdirectory (List)
 add_subdirectory (ListLib)
 add_subdirectory (ListTest)
 
+add_subdirectory (StOnList)
+add_subdirectory (StOnListLib)
+add_subdirectory (StOnListTest)
+
 add_subdirectory (MStack)
 add_subdirectory (MStackLib)
 add_subdirectory (MStackTest)
@@ -69,6 +81,10 @@ add_subdirectory (MasListTest)
 add_subdirectory (Polinom)
 add_subdirectory (PolinomLib)
 add_subdirectory (PolinomTest)
+
+add_subdirectory (RPN)
+add_subdirectory (RPNLib)
+add_subdirectory (RPNTest)
 
 add_subdirectory (Exeption)
 add_subdirectory(gtest)

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Exeption.h"
 class TMonom {
 protected:
 	TMonom* next;//”казатель на следующий

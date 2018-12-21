@@ -1,16 +1,19 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include "Exeption.h"
 using namespace std;
 template <class T>
 class TVector {
 protected:
-	int l; // длина(размерность)
-	T* m; //массив
+	int size; // длина(размерность)
+	T* mas; //массив
 public:
 	TVector	(int n = 0);
 	TVector (TVector <T> &A);
 	TVector<T>& operator=(TVector<T> &A);
 	bool operator==(TVector &A);
+	bool operator!=(TVector &A);
 	T& operator[](int i);
 	TVector<T> operator+(TVector<T> &A);
 	TVector<T> operator-(TVector<T> &A);
@@ -24,25 +27,27 @@ public:
 
 template <class T>
 TVector<T>::TVector(int n) {
-	if (n < 0) {
-		throw "Lenght isn't correct";
-	}
-	l = n;
-	m = new T[l];
-	for (int i = 0; i < l; i++) {
-		m[i] = (T)0;
+	if (n < 0) 
+		{
+			TExeption Ex("negative size", "Vector", "TVector", 1);
+			throw Ex;
+		}
+	size = n;
+	mas = new T[size];
+	for (int i = 0; i < size; i++) {
+		mas[i] = (T)0;
 	}
 }
 
 template <class T>
 TVector<T>::TVector(TVector <T> &A) {
-	l = A.l;
-	if (l == 0)
-		m = nullptr;
+	size = A.size;
+	if (size == 0)
+		mas = nullptr;
 	else {
-		m = new T [l];
-		for (int i = 0; i < l; i++)
-			m[i] = A.m[i];
+		mas = new T [size];
+		for (int i = 0; i < size; i++)
+			mas[i] = A.mas[i];
 	}
 }
 
@@ -51,72 +56,83 @@ TVector<T>& TVector<T> :: operator=(TVector<T> &A) {
 	if (this == &A) {
 		return *this;
 	}
-
-	if (l != A.l) {
-		delete[] m;
-		if (A.l>0)
-			m = new T [A.l];
-		l = A.l;
-	}
-
-	for (int i = 0; i < l; i++) {
-		m[i] = A.m[i];
+	delete[] mas;
+	size = A.size;
+	mas = new T[A.size];
+	for (int i = 0; i < size; i++) {
+		mas[i] = A.mas[i];
 	}
 	return *this;
-
 }
 
 template <class T>
 bool TVector<T>::operator==(TVector<T> &A) {
-	if (l != A.l)
+	if (size != A.size)
 		return false;
-	for (int i = 0; i < l; i++) {
-		if (m[i] != A.m[i])
+	for (int i = 0; i < size; i++) {
+		if (mas[i] != A.mas[i])
 			return false;
 	}
 	return true;
 }
 
 template <class T>
-T& TVector<T> :: operator[](int i) {
-	if ((i < 0) || (i > l)) {
-		throw "Element doesn't exist";
+bool TVector<T>::operator!=(TVector &A) {
+	if (size != A.size)
+		return true;
+	for (int i = 0; i < size; i++) {
+		if (mas[i] != A.mas[i])
+			return true;
 	}
-	return m[i];
+	return false;
+}
+
+
+template <class T>
+T& TVector<T> :: operator[](int i) {
+	if ((i < 0) || (i > size)) 
+		{
+			TExeption Ex("incorrect index", "Vector", "operator[]", 6);
+			throw Ex;
+		}
+	return mas[i];
 }
 
 template <class T>
 TVector<T> TVector<T> :: operator+(TVector<T> &A) {
-	if (l != A.l) {
-		throw "Different lenght";
+	if (size != A.size) {
+		TExeption Ex("different size", "Vector", "operator+", 7);
+		throw Ex;
 	}
 	TVector<T> B(*this);
-	for (int i = 0; i < B.l; i++) {
-		B.m[i] = B.m[i] + A.m[i];
+	for (int i = 0; i < B.size; i++) {
+		B.mas[i] = B.mas[i] + A.mas[i];
 	}
 	return B;
 }
 
 template <class T>
 TVector<T> TVector<T> :: operator-(TVector<T> &A) {
-	if (l != A.l) {
-		throw "Different lenght";
+	if (size != A.size) {
+		TExeption Ex("different size", "Vector", "operator-", 7);
+		throw Ex;
 	}
 	TVector<T> B(*this);
-	for (int i = 0; i < B.l; i++) {
-		B.m[i] = B.m[i] - A.m[i];
+	for (int i = 0; i < B.size; i++) {
+		B.mas[i] = B.mas[i] - A.mas[i];
 	}
 	return B;
 }
 
 template <class T>
 T TVector<T> :: operator*(TVector<T> &A) {
-	if (l != A.l) {
-		throw "Different lenght";
+	if (size != A.size) {
+		TExeption Ex("different size", "Vector", "operator*", 7);
+		throw Ex;
 	}
 	T Sum = 0;
-	for (int i = 0; i < l; i++){
-		Sum += m[i] * A.m[i];
+	for (int i = 0; i < size; i++){
+		Sum += mas[i] * A.mas[i];
 	}
 	return Sum;
 }
@@ -124,23 +140,23 @@ T TVector<T> :: operator*(TVector<T> &A) {
 
 template <class T>
 TVector<T>::~TVector() {
-	delete[] m;
-	l = 0;
-	m = nullptr;
+	delete[] mas;
+	size = 0;
+	mas = nullptr;
 }
 
 template <class T1> 
 ostream& operator<< (ostream& ostr, const TVector<T1> &A) {
-	for (int i = 0; i < A.l; i++) {
-		ostr << A.m[i] << endl;
+	for (int i = 0; i < A.size; i++) {
+		ostr << A.mas[i] << endl;
 	}
 	return ostr;
 }
 
 template <class T1>
 istream& operator>> (istream& istr, TVector<T1> &A) {
-	for (int i = 0; i < A.l; i++) {
-		istr >> A.m[i];
+	for (int i = 0; i < A.size; i++) {
+		istr >> A.mas[i];
 	}
 	return istr;
 }

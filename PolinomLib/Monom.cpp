@@ -60,19 +60,12 @@ void TMonom::SetNext(TMonom* _next)
 
 void TMonom::SetPower(unsigned* _power)
 {
-	try {
-		for (int i = 0; i < n; i++)
-			if (_power[i] >= 0)
-			{
-				power[i] = _power[i];
-			}
-			else
-				throw 1;
-	}
-	catch (...)
-	{
-		throw 2;
-	}
+	if (sizeof(*(_power)) / sizeof(unsigned) != n)
+		throw 1;
+	for (int i = 0; i < n; i++)
+		{
+			power[i] = _power[i];
+		}
 }
 
 void TMonom::SetC(double _c)
@@ -97,7 +90,7 @@ TMonom& TMonom::operator =(TMonom& monom)
 
 TMonom& TMonom::operator +(TMonom& monom)
 {
-	if (n != monom.n || !(*this == monom))
+	if ((n != monom.n) || !(*this == monom))
 		throw 1;
 	TMonom temp(monom);
 	temp.c = c + monom.c;
@@ -116,29 +109,11 @@ TMonom& TMonom::operator -(TMonom& monom)
 TMonom& TMonom::operator*(TMonom& monom){
 	if (n != monom.n || !(*this == monom))
 		throw 1;
-	int max;
-	unsigned int *_power;
-	int _c = c * monom.c;
-	if (n <= monom.n) {
-		max = n;
-		_power = new unsigned int[monom.n];
-		for (int i = 0; i < monom.n; i++){
-			_power[i] = monom.power[i];
-			if (i < n)
-				_power[i] += power[i];
-		}
-	}
-	else {
-		max = n;
-		_power = new unsigned int[n];
-		for (int i = 0; i < n; i++) {
-			_power[i] = power[i];
-			if (i < monom.n)
-				_power[i] += monom.power[i];
-		}
-	}
-		TMonom temp(max, _power, _c);
-		return temp;
+	TMonom temp(*this);
+	temp.c = c * monom.c;
+	for (int i = 0; i < n; i++)
+		temp.power[i] += monom.power[i];
+	return temp;
 }
 
 

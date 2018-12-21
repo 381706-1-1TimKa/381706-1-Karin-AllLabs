@@ -1,5 +1,6 @@
 #pragma once
 #include "Stack.h"
+#include "Exeption.h"
 
 template <class T>
 class TNewStack :public TStack<T>

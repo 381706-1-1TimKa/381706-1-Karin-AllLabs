@@ -1,5 +1,6 @@
 #pragma once
 #include "NewStack.h"
+#include "Exeption.h"
 using namespace std;
 
 template <class T>
@@ -23,8 +24,16 @@ public:
 template <class T>
 TMStack<T>::TMStack(int _n, int _size) 
 {
-	if ((_n < 1) || (_size < 1))
-		throw 1;
+	if (_size < 1)) 
+	{
+		TExeption Ex("incorrect size", "TMStack", "TMStack", 1);
+		throw Ex;
+	}
+	if (_n < 1)) 
+	{
+		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack", 4);
+		throw Ex;
+	}
 	n = _n;
 	size = _size;
 	h = new TNewStack<T>*[n];
@@ -80,7 +89,10 @@ void TMStack<T>::Repack(int k)
 {
 	int freeMem = GetFreeMem();
 	if (freeMem == 0)
-		throw "No free memory";
+	{
+		TExeption Ex("no free memory", "TMStack", "Repack", 5);
+		throw Ex;
+	}
 	int addEv = freeMem / n;
 	int addFull = freeMem % n;
 	int* newSize = new int[n];
@@ -90,7 +102,7 @@ void TMStack<T>::Repack(int k)
 	for (int i = 0; i < n; i++)
 		newSize[i] = addEv + h[i]->TNewStack<T>::GetTop();
 	newSize[k] += addFull;
-	newStart[0] = oldStart[0];
+	newStart[0] = oldStart[0] = mas;
 	for (int i = 1; i < n; i++) {
 		newStart[i] = newStart[i - 1] + newSize[i - 1];
 		oldStart[i] = oldStart[i - 1] + h[i - 1]->TStack<T>::GetSize();
@@ -103,10 +115,10 @@ void TMStack<T>::Repack(int k)
 		}
 		else {
 			int s = i + 1;
-			for (s = i + 1; s < n; s++)
+			for (; s < n; s++)
 				if (newStart[s] <= oldStart[s])
 					break;
-			for (int j = s - 1; j > i; j--) {
+			for (int j = s - 1; j >= i; j--) {
 				for (int r = h[j]->TNewStack<T>::GetTop() - 1; r >= 0; r--)
 					newStart[i][r] = oldStart[j][r];
 				i = s - 1;
@@ -124,7 +136,10 @@ template <class T>
 void TMStack<T>::Put(int n1, T p) 
 {
 	if ((n1 < 0) || (n1 >= n))
-		throw 1;
+	{
+		TExeption Ex("incorrect number of Stacks", "TMStack", "Put", 4);
+		throw Ex;
+	}
 	if (IsFull(n1))
 			Repack(n1);
 	h[n1]->TStack<T>::Put(p);
@@ -134,7 +149,10 @@ template <class T>
 T TMStack<T>::Get(int n1) 
 {
 	if ((n1 < 0) || (n1 >= n))
-		throw 1;
+	{
+		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
+		throw Ex;
+	}
 	return h[n1]->TStack<T>::Get();
 }
 
@@ -142,7 +160,10 @@ template <class T>
 bool TMStack<T>::IsFull(int n1) 
 {
 	if ((n1 < 0) || (n1 >= n))
-		throw 1;
+	{
+		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
+		throw Ex;
+	}
 	return h[n1]->TStack<T>::IsFull();
 }
 
@@ -150,6 +171,9 @@ template <class T>
 bool TMStack<T>::IsEmpty(int n1) 
 {
 	if ((n1 < 0) || (n1 > n))
-		throw 1;
+	{
+		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
+		throw Ex;
+	}
 	return h[n1]->TStack<T>::IsEmpty();
 }

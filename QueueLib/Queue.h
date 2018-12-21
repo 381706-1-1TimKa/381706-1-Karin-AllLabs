@@ -1,5 +1,8 @@
 #pragma once
+#include "Exeption.h"
+#include <string>
 using namespace std;
+
 
 template <class T>
 class TQueue {
@@ -12,8 +15,9 @@ protected:
 public:
 	TQueue(int n = 0);
 	TQueue(TQueue<T> &A);
-	void put(T A);
+	void Put(T A);
 	T Get();
+	int GetCount();
 	bool IsFull();
 	bool IsEmpty();
 };
@@ -21,7 +25,10 @@ public:
 template <class T>
 TQueue<T>::TQueue(int n = 0) {
 	if (n < 0)
-		throw "Incorrect length";
+	{
+		TExeption Ex("negative size", "TQueue", "TQueue", 1);
+		throw Ex;
+	}
 	else if (n == 0) {
 		size = 0;
 		start = 0;
@@ -42,7 +49,7 @@ TQueue<T>::TQueue(int n = 0) {
 
 template <class T>
 TQueue<T>::TQueue(TQueue<T> &A) {
-	if (A.size = 0) {
+	if (A.size == 0) {
 		size = 0;
 		start = 0;
 		r = 0;
@@ -61,9 +68,12 @@ TQueue<T>::TQueue(TQueue<T> &A) {
 }
 
 template <class T>
-void TQueue<T>::put(T A) {
+void TQueue<T>::Put(T A) {
 	if (IsFull())
-		throw "Queue is Full";
+	{
+		TExeption Ex("full queue", "TQueue", "Put", 2);
+		throw Ex;
+	}
 	mas[r] = A;
 	r = (r + 1) % size;
 	count++;
@@ -72,11 +82,19 @@ void TQueue<T>::put(T A) {
 template <class T>
 T TQueue<T>::Get() {
 	if (IsEmpty())
-		throw "Queue is Empty";
+	{
+		TExeption Ex("empty queue", "TQueue", "Get", 3);
+		throw Ex;
+	}
 	count--;
 	int s1 = start;
 	start = (start + 1) % size;
 	return mas[s1];
+}
+
+template <class T>
+int TQueue<T>::GetCount() {
+	return count;
 }
 
 template <class T>

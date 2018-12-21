@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Exeption.h"
 using namespace std;
 
 template <class T>
@@ -21,7 +22,10 @@ public:
 template <class T>
 TStack<T>::TStack(int n){
 	if (n < 0)
-		throw "Incorrect length";
+	{
+		TExeption Ex("negative size", "TStack", "TStack", 1);
+		throw Ex;
+	}
 	else if (n == 0) {
 		size = 0;
 		top = 0;
@@ -50,7 +54,10 @@ TStack<T>::TStack(TStack<T> &A) {
 template <class T>
 void TStack<T>::Put(T A) {
 	if (IsFull())
-		throw "FULL";
+	{
+		TExeption Ex("full stack", "TStack", "Put", 2);
+		throw Ex;
+	}
 	mas[top] = A;
 	top++;
 }
@@ -58,7 +65,10 @@ void TStack<T>::Put(T A) {
 template <class T>
 T TStack<T>::Get(){
 	if (IsEmpty())
-		throw "Empty";
+	{
+		TExeption Ex("empty stack", "TStack", "Get", 3);
+		throw Ex;
+	}
 	else {
 		top--;
 		return mas[top];

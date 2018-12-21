@@ -1,5 +1,6 @@
 #pragma once
 #include "Monom.h"
+#include "Exeption.h"
 class TPolynom {
 protected:
 	TMonom *start;

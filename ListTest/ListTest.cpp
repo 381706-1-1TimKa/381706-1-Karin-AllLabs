@@ -1,6 +1,7 @@
 #include <gtest.h>
 #include "List.h"
 #include "Elem.h"
+using namespace std;
 
 TEST(Elem, can_create) 
 {
@@ -105,6 +106,9 @@ TEST(List, can_put_and_get_end_for_list_with_many_elem)
 	A.PutEnd(3);
 	A.PutEnd(4);
 	ASSERT_EQ(A.GetEnd(), 4);
+	ASSERT_EQ(A.GetEnd(), 3);
+	//ASSERT_EQ(A.GetEnd(), 2);
+	//ASSERT_EQ(A.GetEnd(), 1);
 }
 
 

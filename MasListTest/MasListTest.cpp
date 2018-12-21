@@ -21,6 +21,10 @@ TEST(MasList, can_get_first_element)
 {
 	TMasList<int> A(5);
 	A.PushStart(10);
+	A.PushStart(11);
+	A.PushStart(12);
+	ASSERT_EQ(A.PullStart(), 12);
+	ASSERT_EQ(A.PullStart(), 11);
 	ASSERT_EQ(A.PullStart(), 10);
 }
 
