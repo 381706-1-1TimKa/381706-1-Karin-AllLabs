@@ -56,6 +56,22 @@ TEST(MultiStack, can_put_and_get_at_MS_with_some_stack)
 	ASSERT_EQ(MS.Get(3), 3);
 }
 
+TEST(MultiStack, can_copy)
+{
+	TMStack<int> MS(5, 10);
+	MS.Put(0, 0);
+	MS.Put(1, 1);
+	MS.Put(2, 2);
+	MS.Put(3, 3);
+	MS.Put(4, 4);
+	TMStack<int> A(MS);
+	ASSERT_EQ(A.Get(0), 0);
+	ASSERT_EQ(A.Get(1), 1);
+	ASSERT_EQ(A.Get(2), 2);
+	ASSERT_EQ(A.Get(3), 3);
+	ASSERT_EQ(A.Get(4), 4);
+}
+
 TEST(MultiStack, IsFull_is_correct_for_MS_with_some_stack)
 {
 	TMStack<int> MS(5, 5);

@@ -10,11 +10,13 @@ protected:
 public:
 	TList();
 	TList(TList<T> &A);
+	~TList();
 	void PutBegin(T A);
 	void PutEnd(T A);
 	T GetBegin();
 	T GetEnd();
-	//T GetElem(T* A);
+	T GetElem(int ind);
+	bool IsEmpty();
 	//T* GetInd(T A);
 };
 
@@ -38,6 +40,22 @@ TList<T>::TList(TList<T> &A) {
 			b = b->GetNext();
 		}
 	}
+}
+
+template <class T>
+TList<T>::~TList()
+{
+	if (begin != 0) {
+		TElem<T> *a, *b;
+		a = begin;
+		while (a->GetNext() != 0)
+		{
+			b = a;
+			a = a->GetNext();
+			delete b;
+		}
+	}
+
 }
 
 template <class T>
@@ -68,6 +86,10 @@ void TList<T>::PutEnd(T A){
 
 template <class T>
 T TList<T>::GetBegin(){
+	if (IsEmpty()) {
+		TExeption ex("Empty list", "List.h", "GetBegin", 2);
+		throw ex;
+	}
 	TElem<T>* a = begin;
 	T tmp = begin->Get();
 	begin = begin->GetNext();
@@ -77,18 +99,23 @@ T TList<T>::GetBegin(){
 
 template <class T>
 T TList<T>::GetEnd(){
+	if (IsEmpty()) {
+		TExeption ex("Empty list", "List.h", "GetEnd", 2);
+		throw ex;
+	}
 	TElem<T>* a;
 	T tmp;
-	if ((begin->GetNext() != 0) && (begin->GetNext() != nullptr)) {
+	if (begin->GetNext() != 0) {
 		a = begin;
-		while ((a->GetNext()->GetNext() != 0) && (a->GetNext()->GetNext() != nullptr))
+		while (a->GetNext()->GetNext() != 0) 
 			a = a->GetNext();
 		tmp = a->GetNext()->Get();
 		a->SetNext(0);
 		delete[] a->GetNext();
 	}
 
-	else if ((begin->GetNext() == 0) || (begin->GetNext() == nullptr)) {
+	else if (begin->GetNext() == 0) 
+	{
 		tmp = begin->Get();
 		begin = 0;
 	}
@@ -96,6 +123,24 @@ T TList<T>::GetEnd(){
 		throw 1;
 
 	return tmp;
+}
+
+template <class T>
+T TList<T>::GetElem(int ind) {
+	TElem<T>* a = begin;
+	for (int i = 0; i <= ind; i++) {
+		if (a->GetNext() == 0) {
+			TExeption ex("Element not found", "List.h", "GetElem", 1);
+			throw ex;
+		}
+		a = a->GetNext();
+	}
+	return a->Get();
+}
+
+template <class T>
+bool TList<T>::IsEmpty() {
+	return (begin == 0);
 }
 
 //template <class T>

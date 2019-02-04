@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "Exeption.h"
 using namespace std;
 
@@ -12,6 +11,7 @@ protected:
 public:
 	TStack<T> (int n=0);
 	TStack<T> (TStack<T> &A);
+	virtual ~TStack<T>();
 	void Put (T A);
 	T Get();
 	int GetSize();
@@ -23,13 +23,13 @@ template <class T>
 TStack<T>::TStack(int n){
 	if (n < 0)
 	{
-		TExeption Ex("negative size", "TStack", "TStack", 1);
+		TExeption Ex("negative size", "Stack.h", "TStack", 1);
 		throw Ex;
 	}
 	else if (n == 0) {
 		size = 0;
 		top = 0;
-		mas = nullptr;
+		mas = 0;
 	}
 	else {
 		size = n;
@@ -52,10 +52,18 @@ TStack<T>::TStack(TStack<T> &A) {
 }
 
 template <class T>
+TStack<T>::~TStack() {
+	delete[] mas;
+	mas = 0;
+	top = 0;
+	size = 0;
+}
+
+template <class T>
 void TStack<T>::Put(T A) {
 	if (IsFull())
 	{
-		TExeption Ex("full stack", "TStack", "Put", 2);
+		TExeption Ex("full stack", "Stack.h", "Put", 2);
 		throw Ex;
 	}
 	mas[top] = A;
@@ -66,7 +74,7 @@ template <class T>
 T TStack<T>::Get(){
 	if (IsEmpty())
 	{
-		TExeption Ex("empty stack", "TStack", "Get", 3);
+		TExeption Ex("empty stack", "Stack.h", "Get", 3);
 		throw Ex;
 	}
 	else {
@@ -82,16 +90,10 @@ int TStack<T>::GetSize() {
 
 template <class T>
 bool TStack<T>::IsFull() {
-	if (top >= size)
-		return true;
-	else
-		return false;
+	return (top == size);
 }
 
 template <class T>
 bool TStack<T>::IsEmpty(){
-	if (top == 0)
-		return true;
-	else
-		return false;
+	return (top == 0);
 }

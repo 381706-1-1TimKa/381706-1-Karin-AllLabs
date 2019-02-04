@@ -1,5 +1,5 @@
 #pragma once
-#include <queue>
+#include "Queue.h"
 #include "Exeption.h"
 using namespace std;
 
@@ -12,11 +12,12 @@ class TMasList{
 	int count;
 	int start;
 	int finish;
-	queue<int> freeElem;
+	TQueue<int> freeElem;
 	
 public:
 	TMasList(int _size = 10);
 	TMasList(TMasList<T> &A);
+	~TMasList();
 	void PushStart(T elem);	//положить элемент в начало
 	void PushFinish(T elem);	//положить элемент в конец
 	T PullStart();	//взять первый элемент
@@ -26,7 +27,7 @@ public:
 };
 
 template <class T>
-TMasList<T>::TMasList(int _size)
+TMasList<T>::TMasList(int _size) : freeElem(_size)
 {
 	if (_size <= 0) {
 		TExeption Ex("negative size", "MasList.h", "TMasList(int _size)", 1);
@@ -42,7 +43,7 @@ TMasList<T>::TMasList(int _size)
 	for (int i = 0; i < size; i++) {
 		nextInd[i] = -2;
 		prevInd[i] = -2;
-		freeElem.push(i);
+		freeElem.Put(i);
 	}
 }
 
@@ -64,14 +65,24 @@ TMasList<T>::TMasList(TMasList<T> &A):freeElem(A.freeElem)
 }
 
 template <class T>
+TMasList<T>::~TMasList() {
+	size = 0;
+	count = 0;
+	start = -1;
+	finish = -1;
+	delete[] mas;
+	delete[] nextInd;
+	delete[] prevInd;
+}
+
+template <class T>
 void TMasList<T>::PushStart(T elem)	//положить элемент в начало
 {
 	if (IsFull() == 1) {
 		TExeption Ex("Full list", "MasList.h", "PushStart", 2);
 		throw Ex;
 	}
-	int ifree = freeElem.front();
-	freeElem.pop();
+	int ifree = freeElem.Get();
 	mas[ifree] = elem;
 	nextInd[ifree] = start;
 	if (start != -1)
@@ -89,14 +100,12 @@ void TMasList<T>::PushFinish(T elem)	//положить элемент в конец
 		TExeption Ex("Full list", "MasList.h", "PushFinish", 2);
 		throw Ex;
 	}
-	int ifree = freeElem.front();
-	freeElem.pop();
+	int ifree = freeElem.Get();
 	mas[ifree] = elem;
 	if (finish != -1)
 		nextInd[finish] = ifree;
 	else {
 		start = ifree;
-		prevInd[ifree] = -1;
 	}
 	prevInd[ifree] = finish;
 	finish = ifree;
@@ -112,15 +121,15 @@ T TMasList<T>::PullStart()	//взять первый элемент
 	}
 	T elem = mas[start];
 	int newstart = nextInd[start];
-	freeElem.push(start);
+	freeElem.Put(start);
 	nextInd[start] = -2;
 	prevInd[start] = -2;
-	if (newstart != -1)
-		prevInd[newstart] = -1;
+	start = newstart;
+	if (start != -1)
+		prevInd[start] = -1;
 	else
 		finish = -1;
 	count--;
-	start = newstart;
 	return elem;
 }
 
@@ -135,7 +144,7 @@ T TMasList<T>::PullFinish()		//взять последний элемент
 	int newFinish = prevInd[finish];
 	prevInd[finish] = -2;
 	nextInd[finish] = -2;
-	freeElem.push(finish);
+	freeElem.Put(finish);
 	finish = newFinish;
 	if (newFinish != -1)
 		nextInd[newFinish] = -1;

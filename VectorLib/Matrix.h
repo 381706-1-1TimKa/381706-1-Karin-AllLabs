@@ -26,14 +26,14 @@ public:
 };
 
 template <class T>
-TMatrix<T>::TMatrix (int n):TVector<TVector<T>>(n) {
+TMatrix<T>::TMatrix (int n):TVector<TVector<T> >(n) {
 	for (int i = 0; i < n; i++) {
 		mas[i] = TVector<T>(i+1);
 	}
 }
 
 template <class T>
-TMatrix<T>::TMatrix(TMatrix<T>& A):TVector<TVector<T>>(A) {
+TMatrix<T>::TMatrix(TMatrix<T>& A):TVector<TVector<T> >(A) {
 	
 }
 //TMatrix<T>::TMatrix (const TMatrix<T>& A){
@@ -54,16 +54,16 @@ TMatrix<T> TMatrix<T>::operator+(TMatrix<T> &A) {
 
 template <class T>
 TMatrix<T> TMatrix<T>::operator-(TMatrix<T>& A) {
-	return TVector<TVector<T>>::operator-(A);
+	return TVector<TVector<T> >::operator-(A);
 }
 
 template <class T>
 TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
-	if (size != A.size)
-		if (size != A.size) {
-			TExeption Ex("different size", "Matrix", "operator*", 7);
-			throw Ex;
-		}
+	if (this->size != A.size)
+	{
+		TExeption Ex("different size", "Matrix", "operator*", 7);
+		throw Ex;
+	}
 	TMatrix<T> tmp(size);
 	int sum = 0;
 	for (int i = 0; i < size; i++) {
@@ -80,7 +80,7 @@ TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
 template <class T>
 TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& A)
 {
-	if (size != A.size)
+	if (this->size != A.size)
 		if (size != A.size) {
 			TExeption Ex("different size", "Matrix", "operator*", 7);
 			throw Ex;
@@ -167,7 +167,7 @@ bool TMatrix<T>::operator!=(TMatrix<T>& A)
 //}
 
 template <class T>
-TMatrix<T>::TMatrix(TVector<TVector<T> > &A) : TVector<TVector<T>>(A) {};
+TMatrix<T>::TMatrix(TVector<TVector<T> > &A) : TVector<TVector<T> >(A) {};
 
 //template <class T>
 //T TMatrix<T>::Get(int row, int col) {

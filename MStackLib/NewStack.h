@@ -16,9 +16,9 @@ public:
 
 template <class T>
 TNewStack<T>::TNewStack(int n, T* m){
-	size = n;
-	top = 0;
-	mas = m;
+	TStack<T>::size = n;
+	TStack<T>::top = 0;
+	TStack<T>::mas = m;
 }
 
 template <class T>

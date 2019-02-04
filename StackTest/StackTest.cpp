@@ -28,9 +28,14 @@ TEST(Stack, IsEmpty_is_work) {
 
 TEST(Stack, can_put_and_get) {
 	TStack<double> S(5);
-	S.Put(5);
-	int k=S.Get();
-	ASSERT_EQ(5, k);
+	S.Put(1);
+	S.Put(2);
+	S.Put(3);
+	S.Put(4);
+	ASSERT_EQ(4, S.Get());
+	ASSERT_EQ(3, S.Get());
+	ASSERT_EQ(2, S.Get());
+	ASSERT_EQ(1, S.Get());
 }
 
 TEST(Stack, can_not_put_in_full_stack) {

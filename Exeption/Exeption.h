@@ -19,7 +19,7 @@ void TExeption::Print() {
 	cout << "Exeption" << endl;
 	if (number != 0)
 		cout << "exeption number " << number << endl;
-	cout << "massege: " << name << endl;
+	cout << "massage: " << name << endl;
 	cout << "In file: " << file << endl;
 	cout << "Function: " << func << endl;
 }

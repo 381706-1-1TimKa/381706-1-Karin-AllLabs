@@ -13,6 +13,8 @@ class TMStack
 public:
 	TMStack(int _n, int _size);
 	TMStack(TMStack<T> &A);
+	~TMStack();
+	int GetStackNumber();
 	int GetFreeMem();
 	void Repack(int k);
 	void Put(int n1, T p);
@@ -24,12 +26,12 @@ public:
 template <class T>
 TMStack<T>::TMStack(int _n, int _size) 
 {
-	if (_size < 1)) 
+	if (_size < 1) 
 	{
 		TExeption Ex("incorrect size", "TMStack", "TMStack", 1);
 		throw Ex;
 	}
-	if (_n < 1)) 
+	if (_n < 1)
 	{
 		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack", 4);
 		throw Ex;
@@ -65,15 +67,29 @@ TMStack<T>::TMStack(TMStack<T> &A)
 	p = new int[n];
 	for (int i = 0; i < n; i++) 
 		p[i] = A.h[i]->GetSize();
-	h[0] = new TNewStack<T>(*A.h[0]);
-	h[0]->SetMas(p[0], mas);
 	int sizeSt = 0;
-	for (int i = 1; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		h[i] = new TNewStack<T>(*A.h[i]);
-		h[i]->SetMas(p[i], &mas[p[0] + sizeSt]);
+		h[i]->SetMas(p[i], &mas[sizeSt]);
 		sizeSt += p[i];
 	}
+	delete[] p;
 }
+
+
+template <class T>
+TMStack<T>::~TMStack()
+{
+	n = 0;
+	size = 0;
+	delete[] h;
+	delete[] mas;
+}
+
+int TMStack<int>::GetStackNumber() {
+	return n;
+}
+
 
 template <class T>
 int TMStack<T>::GetFreeMem() 
