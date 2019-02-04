@@ -86,7 +86,8 @@ TMStack<T>::~TMStack()
 	delete[] mas;
 }
 
-int TMStack<int>::GetStackNumber() {
+template <class T>
+int TMStack<T>::GetStackNumber() {
 	return n;
 }
 
