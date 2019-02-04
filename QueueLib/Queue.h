@@ -50,7 +50,7 @@ void TQueue<T>::Put(T A)
 		TExeption Ex("full queue", "TQueue", "Put", 2);
 		throw Ex;
 	}
-	mas[rear] = A;
+	TStack<T>::mas[rear] = A;
 	rear = (rear + 1) % size;
 	count++;
 }
@@ -64,9 +64,9 @@ T TQueue<T>::Get()
 		throw Ex;
 	}
 	count--;
-	int t1 = top;
-	top = (top + 1) % size;
-	return mas[t1];
+	int t1 = TStack<T>::top;
+	TStack<T>::top = (top + 1) % size;
+	return TStack<T>::mas[t1];
 }
 
 template <class T>
@@ -78,7 +78,7 @@ int TQueue<T>::GetCount()
 template <class T>
 bool TQueue<T>::IsFull() 
 {
-	return (count == size);
+	return (count == TStack<T>::size);
 }
 
 template <class T>
