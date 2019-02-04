@@ -6,7 +6,7 @@
 using namespace std;
 //Для удобства обращения (индексации) и вывода матрицы сделаны нижнетреугольными
 template <class T>
-class TMatrix: public TVector<TVector<T>>
+class TMatrix: public TVector<TVector<T> >
 {
 public:
 	TMatrix (int n=0);
@@ -14,8 +14,8 @@ public:
 	TMatrix<T> operator+(TMatrix<T>& A);
 	TMatrix<T> operator-(TMatrix<T>& A);
 	TMatrix<T> operator*(TMatrix<T>& A);
-	TMatrix<T> operator/(TMatrix<T>& A);
-	TMatrix(TVector<TVector<T>> &A);
+	//TMatrix<T> operator/(TMatrix<T>& A);
+	TMatrix(TVector<TVector<T> > &A);
 	TMatrix<T>& operator=(TMatrix<T>& A);
 	bool operator==(TMatrix<T>& A);
 	bool operator!=(TMatrix<T>& A);
@@ -28,7 +28,7 @@ public:
 template <class T>
 TMatrix<T>::TMatrix (int n):TVector<TVector<T> >(n) {
 	for (int i = 0; i < n; i++) {
-		mas[i] = TVector<T>(i+1);
+		TVector<TVector<T> >::mas[i] = TVector<T>(i+1);
 	}
 }
 
@@ -49,12 +49,12 @@ TMatrix<T>::TMatrix(TMatrix<T>& A):TVector<TVector<T> >(A) {
 
 template <class T>
 TMatrix<T> TMatrix<T>::operator+(TMatrix<T> &A) {
-	return TVector<TVector<T>>::operator+(A);
+	return TVector<TVector<T> >::operator+((TVector<TVector<T> >) A);
 }
 
 template <class T>
 TMatrix<T> TMatrix<T>::operator-(TMatrix<T>& A) {
-	return TVector<TVector<T> >::operator-(A);
+	return TVector<TVector<T> >::operator-((TVector<TVector<T> >) A);
 }
 
 template <class T>
@@ -64,12 +64,12 @@ TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
 		TExeption Ex("different size", "Matrix", "operator*", 7);
 		throw Ex;
 	}
-	TMatrix<T> tmp(size);
+	TMatrix<T> tmp(TVector<TVector<T> >::size);
 	int sum = 0;
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j <= i; j++) {
 			for (int k = 0; k < i - j + 1; k++)
-				sum += mas[i][k + j] * A[k + j][j];
+				sum += TVector<TVector<T> >::mas[i][k + j] * A[k + j][j];
 			tmp[i][j] = sum;
 			sum = 0;
 		}
@@ -77,68 +77,68 @@ TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
 	return tmp;
 }
 
-template <class T>
-TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& A)
-{
-	if (this->size != A.size)
-		if (size != A.size) {
-			TExeption Ex("different size", "Matrix", "operator*", 7);
-			throw Ex;
-		}
-	double det = 1;
-	for (int i = 0; i < size; i++)
-	{
-		det = det * A[i][i];
-	}
-	if ((det < 0.0001) && (det > -0.0001))
-	{
-		TExeption Ex("null determinant", "Matrix", "operator/", 8);
-		throw Ex;
-	}
-
-	TMatrix<T> Acopy(A);
-	TMatrix<T> Rez(size);
-	for (int i = 0; i < Rez.size; i++) //проход по строкам
-	{
-		Rez[i][i] = 1;
-		T k = Acopy[i][i];
-		for (int j = 0; j <= i; j++)// проход по столбцам 
-		{
-			Acopy[i][j] = Acopy[i][j] / k;
-			Rez[i][j] = Rez[i][j] / k;
-		}
-	}//получили матрицу с 1 по диагонали
-
-	/*for (int i = 1; i < Rez.size; i++)
-	{
-		for (int j = 0; j < i; j++)
-		{
-			for (int k=0; )
-		}
-	}*/
-	for (int j=0; j<Rez.size-1; j++)
-	{
-		for (int i=j+1; i<Rez.size; i++)
-		{
-		for(int k=0; k<=j; k++)
-			Rez[i][k] = Rez[i][k] - Acopy[i][j] * Rez[i-1][k];
-		}
-	}
-
-	cout << Rez;
-	return (*this)*Rez;
-}
+//template <class T>
+//TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& A)
+//{
+//	if (this->size != A.size)
+//		if (size != A.size) {
+//			TExeption Ex("different size", "Matrix", "operator*", 7);
+//			throw Ex;
+//		}
+//	double det = 1;
+//	for (int i = 0; i < size; i++)
+//	{
+//		det = det * A[i][i];
+//	}
+//	if ((det < 0.0001) && (det > -0.0001))
+//	{
+//		TExeption Ex("null determinant", "Matrix", "operator/", 8);
+//		throw Ex;
+//	}
+//
+//	TMatrix<T> Acopy(A);
+//	TMatrix<T> Rez(size);
+//	for (int i = 0; i < Rez.size; i++) //проход по строкам
+//	{
+//		Rez[i][i] = 1;
+//		T k = Acopy[i][i];
+//		for (int j = 0; j <= i; j++)// проход по столбцам 
+//		{
+//			Acopy[i][j] = Acopy[i][j] / k;
+//			Rez[i][j] = Rez[i][j] / k;
+//		}
+//	}//получили матрицу с 1 по диагонали
+//
+//	/*for (int i = 1; i < Rez.size; i++)
+//	{
+//		for (int j = 0; j < i; j++)
+//		{
+//			for (int k=0; )
+//		}
+//	}*/
+//	for (int j=0; j<Rez.size-1; j++)
+//	{
+//		for (int i=j+1; i<Rez.size; i++)
+//		{
+//		for(int k=0; k<=j; k++)
+//			Rez[i][k] = Rez[i][k] - Acopy[i][j] * Rez[i-1][k];
+//		}
+//	}
+//
+//	cout << Rez;
+//	return (*this)*Rez;
+//}
 
 template <class T>
 TMatrix<T>& TMatrix<T>::operator= (TMatrix<T>& A) {
-	TVector < TVector<T> >::operator= (A);
+	TVector < TVector<T> >::operator= ((TVector<TVector<T> >) A);
 	return *this;
 }
 
 template <class T>
 bool TMatrix<T>::operator==(TMatrix<T>& A)
 {
-	TVector<TVector<T> >::operator==(A);
+	TVector<TVector<T> >::operator==((TVector<TVector<T> >) A);
 }
 
 template <class T>

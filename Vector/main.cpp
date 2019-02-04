@@ -26,7 +26,6 @@ int main()
 
 	cout << D << endl;
 	cout << E << endl;
-	F = D / E;
 	cout << F << endl;
 	return 0;
 
