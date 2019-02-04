@@ -23,28 +23,28 @@ TNewStack<T>::TNewStack(int n, T* m){
 
 template <class T>
 TNewStack<T>::TNewStack(TNewStack<T> &A) {
-	size = A.size;
-	top = A.top;
-	mas = A.mas;
+	TStack<T>::size = A.TStack<T>::size;
+	TStack<T>::top = A.TStack<T>::top;
+	TStack<T>::mas = A.TStack<T>::mas;
 }
 
 template <class T>
 int TNewStack<T>::Free() {
-	return size - top;
+	return TStack<T>::size - TStack<T>::top;
 }
 
 template <class T>
 int TNewStack<T>::GetSize() {
-	return size;
+	return TStack<T>::size;
 }
 
 template <class T>
 int TNewStack<T>::GetTop() {
-	return top;
+	return TStack<T>::top;
 }
 
 template <class T>
 void TNewStack<T>::SetMas(int n, T* m) {
-	size = n;
-	mas = m;
+	TStack<T>::size = n;
+	TStack<T>::mas = m;
 }

@@ -51,7 +51,7 @@ void TQueue<T>::Put(T A)
 		throw Ex;
 	}
 	TStack<T>::mas[rear] = A;
-	rear = (rear + 1) % size;
+	rear = (rear + 1) % TStack<T>::size;
 	count++;
 }
 
@@ -65,7 +65,7 @@ T TQueue<T>::Get()
 	}
 	count--;
 	int t1 = TStack<T>::top;
-	TStack<T>::top = (top + 1) % size;
+	TStack<T>::top = (TStack<T>::top + 1) % TStack<T>::size;
 	return TStack<T>::mas[t1];
 }
 
