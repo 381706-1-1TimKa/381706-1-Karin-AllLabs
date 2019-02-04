@@ -1,6 +1,6 @@
 #include <iostream>
 #include "MStack.h"
-#define _IO_EXAMPLE_
+//#define _IO_EXAMPLE_
 using namespace std;
 
 int ChoiceStack(TMStack<int> &S);

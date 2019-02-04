@@ -1,6 +1,6 @@
 #include <iostream>
 #include "StackList.h"
-#define _IO_EXAMPLE_
+//#define _IO_EXAMPLE_
 using namespace std;
 
 void Print(TStackList<int> A);
