@@ -16,8 +16,20 @@ public:
 		func = _exfunc;
 		number = _exnumber;
 	}
-	TExeption(string _exname, string _exfile, string _exfunc);
-	TExeption(string _exname);
+	TExeption(string _exname, string _exfile, string _exfunc)
+	{
+		name = _exname;
+		file = _exfile;
+		func = _exfunc;
+		number = 0;
+	}
+	TExeption(string _exname)
+	{
+		name = _exname;
+		file = "unknown";
+		func = "unknown";
+		number = 0;
+	}
 	void Print() {
 		cout << "Exeption" << endl;
 		if (number != 0)
@@ -43,17 +55,17 @@ public:
 //	func = _exfunc;
 //	number = _exnumber;
 //}
-
-TExeption::TExeption(string _exname, string _exfile, string _exfunc) {
-	name = _exname;
-	file = _exfile;
-	func = _exfunc;
-	number = 0;
-}
-
-TExeption::TExeption(string _exname) {
-	name = _exname;
-	file = "unknown";
-	func = "unknown";
-	number = 0;
-}
+//
+//TExeption::TExeption(string _exname, string _exfile, string _exfunc) {
+//	name = _exname;
+//	file = _exfile;
+//	func = _exfunc;
+//	number = 0;
+//}
+//
+//TExeption::TExeption(string _exname) {
+//	name = _exname;
+//	file = "unknown";
+//	func = "unknown";
+//	number = 0;
+//}
