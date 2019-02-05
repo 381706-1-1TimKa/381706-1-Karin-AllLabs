@@ -11,14 +11,14 @@ class TMatrix: public TVector<TVector<T> >
 public:
 	TMatrix (int n=0);
 	TMatrix (TMatrix<T>& A);
-	TMatrix<T> operator+(TMatrix<T>& A);
-	TMatrix<T> operator-(TMatrix<T>& A);
-	TMatrix<T> operator*(TMatrix<T>& A);
+	TMatrix<T> operator+(const TMatrix<T>& A);
+	TMatrix<T> operator-(const TMatrix<T>& A);
+	TMatrix<T> operator*(const TMatrix<T>& A);
 	//TMatrix<T> operator/(TMatrix<T>& A);
 	TMatrix(TVector<TVector<T> > &A);
-	TMatrix<T>& operator=(TMatrix<T>& A);
-	bool operator==(TMatrix<T>& A);
-	bool operator!=(TMatrix<T>& A);
+	TMatrix<T>& operator=(const TMatrix<T>& A);
+	bool operator==(const TMatrix<T>& A);
+	bool operator!=(const TMatrix<T>& A);
 	template <class T1>
 	friend ostream& operator<<(ostream& ostr, TMatrix<T1> &A);
 	template <class T1>
@@ -48,17 +48,17 @@ TMatrix<T>::TMatrix(TMatrix<T>& A):TVector<TVector<T> >(A) {
 //}
 
 template <class T>
-TMatrix<T> TMatrix<T>::operator+(TMatrix<T> &A) {
-	return TVector<TVector<T> >::operator+((TVector<TVector<T> >) A);
+TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &A) {
+	return TVector<TVector<T> >::operator+(A);
 }
 
 template <class T>
-TMatrix<T> TMatrix<T>::operator-(TMatrix<T>& A) {
-	return TVector<TVector<T> >::operator-((TVector<TVector<T> >) A);
+TMatrix<T> TMatrix<T>::operator-(const TMatrix<T>& A) {
+	return TVector<TVector<T> >::operator-(A);
 }
 
 template <class T>
-TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
+TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& A) {
 	if (this->size != A.size)
 	{
 		TExeption Ex("different size", "Matrix", "operator*", 7);
@@ -130,20 +130,20 @@ TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
 //}
 
 template <class T>
-TMatrix<T>& TMatrix<T>::operator= (TMatrix<T>& A) 
+TMatrix<T>& TMatrix<T>::operator= (const TMatrix<T>& A) 
 {
-	TVector < TVector<T> >::operator= ((TVector<TVector<T> >) A);
+	TVector < TVector<T> >::operator= (A);
 	return *(this);
 }
 
 template <class T>
-bool TMatrix<T>::operator==(TMatrix<T>& A)
+bool TMatrix<T>::operator==(const TMatrix<T>& A)
 {
-	TVector<TVector<T> >::operator==((TVector<TVector<T> >) A);
+	TVector<TVector<T> >::operator==(A);
 }
 
 template <class T>
-bool TMatrix<T>::operator!=(TMatrix<T>& A)
+bool TMatrix<T>::operator!=(const TMatrix<T>& A)
 {
 	TVector<TVector<T> >::operator!=(A);
 }
