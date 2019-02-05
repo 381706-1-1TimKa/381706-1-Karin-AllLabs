@@ -5,7 +5,7 @@ project(${PROJECT_NAME}) # Название проекта
 
 set(Vector Vector) #Переменная с именем библиотеки
 set (VectorLib VectorLib)
-set (vectorTest vectorTest)
+set (VectorTest VectorTest)
 
 set (Stack Stack)
 set (StackLib StackLib)
