@@ -66,7 +66,7 @@ TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
 	}
 	TMatrix<T> tmp(TVector<TVector<T> >::size);
 	int sum = 0;
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < TVector<TVector<T> >::size; i++) {
 		for (int j = 0; j <= i; j++) {
 			for (int k = 0; k < i - j + 1; k++)
 				sum += TVector<TVector<T> >::mas[i][k + j] * A[k + j][j];
@@ -130,9 +130,10 @@ TMatrix<T> TMatrix<T>::operator*(TMatrix<T>& A) {
 //}
 
 template <class T>
-TMatrix<T>& TMatrix<T>::operator= (TMatrix<T>& A) {
+TMatrix<T>& TMatrix<T>::operator= (TMatrix<T>& A) 
+{
 	TVector < TVector<T> >::operator= ((TVector<TVector<T> >) A);
-	return *this;
+	return *(this);
 }
 
 template <class T>

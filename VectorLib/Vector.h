@@ -43,7 +43,7 @@ template <class T>
 TVector<T>::TVector(TVector <T> &A) {
 	size = A.size;
 	if (size == 0)
-		mas = nullptr;
+		mas = std::nullptr;
 	else {
 		mas = new T [size];
 		for (int i = 0; i < size; i++)
@@ -62,7 +62,7 @@ TVector<T>& TVector<T> :: operator=(TVector<T> &A) {
 	for (int i = 0; i < size; i++) {
 		mas[i] = A.mas[i];
 	}
-	return *this;
+	return *(this);
 }
 
 template <class T>
@@ -142,7 +142,7 @@ template <class T>
 TVector<T>::~TVector() {
 	delete[] mas;
 	size = 0;
-	mas = nullptr;
+	mas = std::nullptr;
 }
 
 template <class T1> 
