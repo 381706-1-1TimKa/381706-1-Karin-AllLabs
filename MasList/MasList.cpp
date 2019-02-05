@@ -1,7 +1,9 @@
 #include <iostream>
 #include "MasList.h"
+#define fortravis
 using namespace std;
 
+#ifndef fortravis  
 int main()
 {
 	try {
@@ -63,3 +65,34 @@ int main()
 		ex.Print();
 	}
 }
+#endif
+
+#ifdef fortravis
+int main() {
+	cout << "Enter the size, please" << endl;
+	int size=10;
+	cout << "10" << endl;
+	TMasList<int> A(10);
+	cout << "Add to the end 1" << endl;
+	A.PushFinish(1);
+	cout << "Add to the end 2" << endl;
+	A.PushFinish(2);
+	cout << "Add to begin 3" << endl;
+	A.PushStart(3);
+	cout << "Add to begin 4" << endl;
+	A.PushStart(4);
+	cout << "Add to finish 5" << endl << endl;
+	A.PushFinish(5);
+	cout << "Take first" << endl;
+	cout << A.PullStart() << endl << endl;
+	cout << "Take first" << endl;
+	cout << A.PullStart() << endl << endl;
+	cout << "Take last" << endl;
+	cout << A.PullFinish() << endl << endl;
+	cout << "Take first" << endl;
+	cout << A.PullStart() << endl << endl;
+	cout << "Take last" << endl;
+	cout << A.PullFinish() << endl << endl;
+	return 0;
+}
+#endif
