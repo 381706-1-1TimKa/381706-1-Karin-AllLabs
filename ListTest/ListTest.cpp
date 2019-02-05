@@ -67,14 +67,14 @@ TEST(List, can_get_first_for_list_with_one_elem)
 {
 	TList<int> A;
 	A.PutBegin(3);
-	ASSERT_NO_THROW(A.GetBegin(), 3);
+	ASSERT_EQ(A.GetBegin(), 3);
 }
 
 TEST(List, can_get_end_for_list_with_one_elem)
 {
 	TList<int> A;
 	A.PutEnd(3);
-	ASSERT_NO_THROW(A.GetEnd(), 3);
+	ASSERT_EQ(A.GetEnd(), 3);
 }
 
 

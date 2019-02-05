@@ -9,27 +9,40 @@ class TExeption {
 	string func;
 	int number;
 public:
-	TExeption(string _name, string _file, string _func, int _number);
-	TExeption(string _name, string _file, string _func);
-	TExeption(string _name);
-	void Print();
+	TExeption(string _exname, string _exfile, string _exfunc, int _exnumber)
+	{
+		name = _exname;
+		file = _exfile;
+		func = _exfunc;
+		number = _exnumber;
+	}
+	TExeption(string _exname, string _exfile, string _exfunc);
+	TExeption(string _exname);
+	void Print() {
+		cout << "Exeption" << endl;
+		if (number != 0)
+			cout << "exeption number " << number << endl;
+		cout << "massage: " << name << endl;
+		cout << "In file: " << file << endl;
+		cout << "Function: " << func << endl;
+	}
 };
 
-void TExeption::Print() {
-	cout << "Exeption" << endl;
-	if (number != 0)
-		cout << "exeption number " << number << endl;
-	cout << "massage: " << name << endl;
-	cout << "In file: " << file << endl;
-	cout << "Function: " << func << endl;
-}
-
-TExeption::TExeption(string _exname, string _exfile, string _exfunc, int _exnumber) {
-	name = _exname;
-	file = _exfile;
-	func = _exfunc;
-	number = _exnumber;
-}
+//void TExeption::Print() {
+//	cout << "Exeption" << endl;
+//	if (number != 0)
+//		cout << "exeption number " << number << endl;
+//	cout << "massage: " << name << endl;
+//	cout << "In file: " << file << endl;
+//	cout << "Function: " << func << endl;
+//}
+//
+//TExeption::TExeption(string _exname, string _exfile, string _exfunc, int _exnumber) {
+//	name = _exname;
+//	file = _exfile;
+//	func = _exfunc;
+//	number = _exnumber;
+//}
 
 TExeption::TExeption(string _exname, string _exfile, string _exfunc) {
 	name = _exname;
