@@ -19,14 +19,6 @@ int main()
 	TMatrix<double> C(2);
 	C = A + B;
 	cout << C <<endl;
-
-	TMatrix<double> D(3), E(3), F(3);
-	cin >> D;
-	cin >> E;
-
-	cout << D << endl;
-	cout << E << endl;
-	cout << F << endl;
 	return 0;
 
 }
