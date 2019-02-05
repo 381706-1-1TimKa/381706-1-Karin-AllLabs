@@ -11,7 +11,7 @@ protected:
 public:
 	TVector	(int n = 0);
 	TVector (TVector <T> &A);
-	TVector<T>& operator=(TVector<T> &A);
+	TVector<T>& operator=(const TVector<T> &A);
 	bool operator==(TVector &A);
 	bool operator!=(TVector &A);
 	T& operator[](int i);
@@ -43,7 +43,7 @@ template <class T>
 TVector<T>::TVector(TVector <T> &A) {
 	size = A.size;
 	if (size == 0)
-		mas = std::nullptr;
+		mas = NULL;
 	else {
 		mas = new T [size];
 		for (int i = 0; i < size; i++)
@@ -52,7 +52,7 @@ TVector<T>::TVector(TVector <T> &A) {
 }
 
 template <class T>
-TVector<T>& TVector<T> :: operator=(TVector<T> &A) {
+TVector<T>& TVector<T> :: operator=(const TVector<T> &A) {
 	if (this == &A) {
 		return *this;
 	}
@@ -142,7 +142,7 @@ template <class T>
 TVector<T>::~TVector() {
 	delete[] mas;
 	size = 0;
-	mas = std::nullptr;
+	mas = NULL;
 }
 
 template <class T1> 
