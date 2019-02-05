@@ -10,12 +10,12 @@ class TMatrix: public TVector<TVector<T> >
 {
 public:
 	TMatrix (int n=0);
-	TMatrix (TMatrix<T>& A);
+	TMatrix (const TMatrix<T>& A);
 	TMatrix<T> operator+(const TMatrix<T>& A);
 	TMatrix<T> operator-(const TMatrix<T>& A);
 	TMatrix<T> operator*(const TMatrix<T>& A);
 	//TMatrix<T> operator/(TMatrix<T>& A);
-	TMatrix(TVector<TVector<T> > &A);
+	TMatrix(const TVector<TVector<T> > &A);
 	TMatrix<T>& operator=(const TMatrix<T>& A);
 	bool operator==(const TMatrix<T>& A);
 	bool operator!=(const TMatrix<T>& A);
@@ -33,7 +33,7 @@ TMatrix<T>::TMatrix (int n):TVector<TVector<T> >(n) {
 }
 
 template <class T>
-TMatrix<T>::TMatrix(TMatrix<T>& A):TVector<TVector<T> >(A) {
+TMatrix<T>::TMatrix(const TMatrix<T>& A):TVector<TVector<T> >(A) {
 	
 }
 //TMatrix<T>::TMatrix (const TMatrix<T>& A){
@@ -168,7 +168,7 @@ bool TMatrix<T>::operator!=(const TMatrix<T>& A)
 //}
 
 template <class T>
-TMatrix<T>::TMatrix(TVector<TVector<T> > &A) : TVector<TVector<T> >(A) {};
+TMatrix<T>::TMatrix(const TVector<TVector<T> > &A) : TVector<TVector<T> >(A) {};
 
 //template <class T>
 //T TMatrix<T>::Get(int row, int col) {

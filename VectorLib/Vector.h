@@ -10,14 +10,14 @@ protected:
 	T* mas; //массив
 public:
 	TVector	(int n = 0);
-	TVector (TVector <T> &A);
+	TVector (const TVector <T> &A);
 	TVector<T>& operator=(const TVector<T> &A);
-	bool operator==(TVector &A);
-	bool operator!=(TVector &A);
+	bool operator==(const TVector &A);
+	bool operator!=(const TVector &A);
 	T& operator[](int i);
-	TVector<T> operator+(TVector<T> &A);
-	TVector<T> operator-(TVector<T> &A);
-	T operator*(TVector<T> &A);
+	TVector<T> operator+(const TVector<T> &A);
+	TVector<T> operator-(const TVector<T> &A);
+	T operator*(const TVector<T> &A);
 	virtual ~TVector();
 	template <class T1>
 	friend ostream& operator<< (ostream& ostr, const TVector<T1> &A);
@@ -40,7 +40,7 @@ TVector<T>::TVector(int n) {
 }
 
 template <class T>
-TVector<T>::TVector(TVector <T> &A) {
+TVector<T>::TVector(const TVector <T> &A) {
 	size = A.size;
 	if (size == 0)
 		mas = NULL;
@@ -66,7 +66,7 @@ TVector<T>& TVector<T> :: operator=(const TVector<T> &A) {
 }
 
 template <class T>
-bool TVector<T>::operator==(TVector<T> &A) {
+bool TVector<T>::operator==(const TVector<T> &A) {
 	if (size != A.size)
 		return false;
 	for (int i = 0; i < size; i++) {
@@ -77,7 +77,7 @@ bool TVector<T>::operator==(TVector<T> &A) {
 }
 
 template <class T>
-bool TVector<T>::operator!=(TVector &A) {
+bool TVector<T>::operator!=(const TVector &A) {
 	if (size != A.size)
 		return true;
 	for (int i = 0; i < size; i++) {
@@ -99,7 +99,7 @@ T& TVector<T> :: operator[](int i) {
 }
 
 template <class T>
-TVector<T> TVector<T> :: operator+(TVector<T> &A) {
+TVector<T> TVector<T> :: operator+(const TVector<T> &A) {
 	if (size != A.size) {
 		TExeption Ex("different size", "Vector", "operator+", 7);
 		throw Ex;
@@ -112,7 +112,7 @@ TVector<T> TVector<T> :: operator+(TVector<T> &A) {
 }
 
 template <class T>
-TVector<T> TVector<T> :: operator-(TVector<T> &A) {
+TVector<T> TVector<T> :: operator-(const TVector<T> &A) {
 	if (size != A.size) {
 		TExeption Ex("different size", "Vector", "operator-", 7);
 		throw Ex;
@@ -125,7 +125,7 @@ TVector<T> TVector<T> :: operator-(TVector<T> &A) {
 }
 
 template <class T>
-T TVector<T> :: operator*(TVector<T> &A) {
+T TVector<T> :: operator*(const TVector<T> &A) {
 	if (size != A.size) {
 		TExeption Ex("different size", "Vector", "operator*", 7);
 		throw Ex;
