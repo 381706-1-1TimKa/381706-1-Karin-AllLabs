@@ -83,7 +83,7 @@ template <class T>
 TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& A)
 {
 	if (this->size != A.size)
-		if (size != A.size) {
+		if (TMatrix<T>::size != A.size) {
 			TExeption Ex("different size", "Matrix", "operator*", 7);
 			throw Ex;
 		}
@@ -94,7 +94,7 @@ template <class T>
 T TMatrix<T>::GetDet() 
 {
 	T det = 1;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < TMatrix<T>::size; i++)
 	{
 		det = det * (*this)[i][i];
 	}
@@ -113,7 +113,7 @@ TMatrix<T> TMatrix<T>::GetInvers()
 
 	//создаём основную матрицу (копируем) и вспомогательную (единичную)
 	TMatrix<T> Acopy(*this);
-	TMatrix<T> Rez(size);
+	TMatrix<T> Rez(TMatrix<T>::size);
 	for (int i = 0; i < Rez.size; i++) //проход по строкам
 	{
 		Rez[i][i] = 1;
