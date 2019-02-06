@@ -14,7 +14,9 @@ public:
 	TMatrix<T> operator+(const TMatrix<T>& A);
 	TMatrix<T> operator-(const TMatrix<T>& A);
 	TMatrix<T> operator*(const TMatrix<T>& A);
-	//TMatrix<T> operator/(TMatrix<T>& A);
+	T GetDet();
+	TMatrix<T> GetInvers();
+	TMatrix<T> operator/(TMatrix<T>& A);
 	TMatrix(const TVector<TVector<T> > &A);
 	TMatrix<T>& operator=(const TMatrix<T>& A);
 	bool operator==(const TMatrix<T>& A);
@@ -65,11 +67,11 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& A) {
 		throw Ex;
 	}
 	TMatrix<T> tmp(TVector<TVector<T> >::size);
-	int sum = 0;
+	T sum = 0;
 	for (int i = 0; i < TVector<TVector<T> >::size; i++) {
 		for (int j = 0; j <= i; j++) {
 			for (int k = 0; k < i - j + 1; k++)
-				sum += TVector<TVector<T> >::mas[i][k + j] * A[k + j][j];
+				sum =sum + TVector<TVector<T> >::mas[i][k + j] * A.mas[k + j][j];
 			tmp[i][j] = sum;
 			sum = 0;
 		}
@@ -77,57 +79,62 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& A) {
 	return tmp;
 }
 
-//template <class T>
-//TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& A)
-//{
-//	if (this->size != A.size)
-//		if (size != A.size) {
-//			TExeption Ex("different size", "Matrix", "operator*", 7);
-//			throw Ex;
-//		}
-//	double det = 1;
-//	for (int i = 0; i < size; i++)
-//	{
-//		det = det * A[i][i];
-//	}
-//	if ((det < 0.0001) && (det > -0.0001))
-//	{
-//		TExeption Ex("null determinant", "Matrix", "operator/", 8);
-//		throw Ex;
-//	}
-//
-//	TMatrix<T> Acopy(A);
-//	TMatrix<T> Rez(size);
-//	for (int i = 0; i < Rez.size; i++) //проход по строкам
-//	{
-//		Rez[i][i] = 1;
-//		T k = Acopy[i][i];
-//		for (int j = 0; j <= i; j++)// проход по столбцам 
-//		{
-//			Acopy[i][j] = Acopy[i][j] / k;
-//			Rez[i][j] = Rez[i][j] / k;
-//		}
-//	}//получили матрицу с 1 по диагонали
-//
-//	/*for (int i = 1; i < Rez.size; i++)
-//	{
-//		for (int j = 0; j < i; j++)
-//		{
-//			for (int k=0; )
-//		}
-//	}*/
-//	for (int j=0; j<Rez.size-1; j++)
-//	{
-//		for (int i=j+1; i<Rez.size; i++)
-//		{
-//		for(int k=0; k<=j; k++)
-//			Rez[i][k] = Rez[i][k] - Acopy[i][j] * Rez[i-1][k];
-//		}
-//	}
-//
-//	cout << Rez;
-//	return (*this)*Rez;
-//}
+template <class T>
+TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& A)
+{
+	if (this->size != A.size)
+		if (size != A.size) {
+			TExeption Ex("different size", "Matrix", "operator*", 7);
+			throw Ex;
+		}
+	return (*this)*A.GetInvers();
+}
+
+template <class T>
+T TMatrix<T>::GetDet() 
+{
+	T det = 1;
+	for (int i = 0; i < size; i++)
+	{
+		det = det * (*this)[i][i];
+	}
+	return det;
+}
+
+template <class T>
+TMatrix<T> TMatrix<T>::GetInvers() 
+{
+	T det = this->GetDet();
+	if ((det < 0.0001) && (det > -0.0001))
+	{
+		TExeption Ex("null determinant", "Matrix", "operator/", 8);
+		throw Ex;
+	}
+
+	//создаём основную матрицу (копируем) и вспомогательную (единичную)
+	TMatrix<T> Acopy(*this);
+	TMatrix<T> Rez(size);
+	for (int i = 0; i < Rez.size; i++) //проход по строкам
+	{
+		Rez[i][i] = 1;
+		T k = Acopy[i][i];
+		for (int j = 0; j <= i; j++)// проход по столбцам 
+		{
+			Acopy[i][j] = Acopy[i][j] / k;
+			Rez[i][j] = Rez[i][j] / k; //это можно оптимизировать
+		}
+	}//получили основную единичную и диагональную вспомогательную
+
+	for (int j = 0; j < Rez.size - 1; j++)
+	{
+		for (int i = j + 1; i < Rez.size; i++)
+		{
+			for (int k = 0; k <= j; k++)
+				Rez[i][k] = Rez[i][k] - Acopy[i][j] * Rez[j][k];
+		}
+	}
+	return Rez;
+}
 
 template <class T>
 TMatrix<T>& TMatrix<T>::operator= (const TMatrix<T>& A) 
@@ -192,8 +199,8 @@ ostream& operator<<(ostream& ostr, TMatrix<T1> &A) {
 		for (int j = 0; j <= i; j++) {
 			ostr << A.mas[i][j] << "\t";
 		}
-		for (int k = 0; k < A.size - i - 1; k++)
-			ostr << "0\t";
+		/*for (int k = 0; k < A.size - i - 1; k++)
+			ostr << "0\t";*/
 		ostr << endl;
 	}
 	return ostr;
