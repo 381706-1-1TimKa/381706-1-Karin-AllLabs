@@ -13,11 +13,11 @@ public:
 	~TList();
 	void PutBegin(T A);
 	void PutEnd(T A);
+	void PutElem(T A, int n);
 	T GetBegin();
 	T GetEnd();
 	T GetElem(int ind);
 	bool IsEmpty();
-	//T* GetInd(T A);
 };
 
 template <class T>
@@ -71,7 +71,8 @@ void TList<T>::PutBegin(T A){
 }
 
 template <class T>
-void TList<T>::PutEnd(T A){
+void TList<T>::PutEnd(T A)
+{
 	if (begin != 0) {
 		TElem<T>* a = begin;
 		while (a->GetNext() != 0) {
@@ -81,6 +82,32 @@ void TList<T>::PutEnd(T A){
 	}
 	else {
 		begin = new TElem<T>(A, 0);
+	}
+}
+
+template <class T>
+void TList<T>::PutElem(T A, int n)
+{
+	if (n < 0) {
+		TExeption ex("Incorrect value", "List.h", "PutElem", 3);
+		throw ex;
+	}
+
+	else if (n == 0)
+		this->PutBegin(A);
+	
+	else
+	{
+		TElem<T>* a = begin;
+		for (int i = 0; i < n-1; i++) {
+			if (a == 0) {
+				TExeption ex("Incorrect value", "List.h", "PutElem", 3);
+				throw ex;
+			}
+			a = a->GetNext();
+		}//получили элемент, за которым должен следовать добавляемый
+		TElem<T>* b = a->GetNext();
+		a->SetNext(new TElem<T>(A, b));
 	}
 }
 
@@ -111,7 +138,7 @@ T TList<T>::GetEnd(){
 			a = a->GetNext();
 		tmp = a->GetNext()->Get();
 		a->SetNext(0);
-		delete[] a->GetNext();
+		delete a->GetNext();
 	}
 
 	else if (begin->GetNext() == 0) 
@@ -127,34 +154,37 @@ T TList<T>::GetEnd(){
 
 template <class T>
 T TList<T>::GetElem(int ind) {
-	TElem<T>* a = begin;
-	for (int i = 0; i <= ind; i++) {
-		if (a->GetNext() == 0) {
-			TExeption ex("Element not found", "List.h", "GetElem", 1);
-			throw ex;
-		}
-		a = a->GetNext();
+	if (IsEmpty()) {
+		TExeption ex("Empty List", "List.h", "PutElem", 2);
+		throw ex;
 	}
-	return a->Get();
+	
+	if (ind < 0) {
+		TExeption ex("Incorrect value", "List.h", "PutElem", 3);
+		throw ex;
+	}
+
+	else if (ind == 0)
+		return this->GetBegin();
+
+	else {
+		TElem<T>* a = begin;
+		for (int i = 0; i < ind-1; i++) {
+			a = a->GetNext();
+			if ((a->GetNext() == 0)||(a==0)) {
+				TExeption ex("Element not found", "List.h", "GetElem", 1);
+				throw ex;
+			}
+		}
+		TElem<T>* b = a->GetNext(); //вернуть надо b
+		T temp = b->Get();
+		a->SetNext(b->GetNext());
+		delete b;
+		return temp;
+	}
 }
 
 template <class T>
 bool TList<T>::IsEmpty() {
 	return (begin == 0);
 }
-
-//template <class T>
-//T TList<T>::GetElem(T* A){
-//}
-
-//template <class T>
-//T* TList<T>::GetInd(T A){
-//	TElem<T>* a = begin;
-//	int i = 0;
-//	while (*(a->GetNext()) != A) {
-//		if (a->GetNext() != 0) && (a->GetNext() != nullptr)
-//			throw 1;
-//		a = a->GetNext();
-//	}
-//	return 
-//}

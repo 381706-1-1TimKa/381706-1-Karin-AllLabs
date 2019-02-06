@@ -107,8 +107,38 @@ TEST(List, can_put_and_get_end_for_list_with_many_elem)
 	A.PutEnd(4);
 	ASSERT_EQ(A.GetEnd(), 4);
 	ASSERT_EQ(A.GetEnd(), 3);
-	//ASSERT_EQ(A.GetEnd(), 2);
-	//ASSERT_EQ(A.GetEnd(), 1);
+	ASSERT_EQ(A.GetEnd(), 2);
+	ASSERT_EQ(A.GetEnd(), 1);
+}
+
+TEST(List, can_put_at_any_positions)
+{
+	TList<int> A;
+	A.PutElem(1, 0);
+	A.PutElem(2, 0);
+	A.PutElem(3, 2);
+	A.PutElem(4, 3);
+	A.PutElem(5, 1);
+	ASSERT_EQ(A.GetBegin(), 2);
+	ASSERT_EQ(A.GetBegin(), 5);
+	ASSERT_EQ(A.GetBegin(), 1);
+	ASSERT_EQ(A.GetBegin(), 3);
+	ASSERT_EQ(A.GetBegin(), 4);
+}
+
+TEST(List, can_get_from_any_position)
+{
+	TList<int> A;
+	A.PutEnd(1);
+	A.PutEnd(2);
+	A.PutEnd(3);
+	A.PutEnd(4);
+	A.PutEnd(5);
+	ASSERT_EQ(A.GetElem(0), 1);
+	ASSERT_EQ(A.GetElem(1), 3);
+	ASSERT_EQ(A.GetElem(2), 5);
+	ASSERT_EQ(A.GetElem(0), 2);
+	ASSERT_EQ(A.GetElem(0), 4);
 }
 
 
