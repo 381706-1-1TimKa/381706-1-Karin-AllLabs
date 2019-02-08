@@ -1,6 +1,6 @@
 #include <iostream>
 #include "List.h"
-#include "Exeption.h"
+#include "Exception.h"
 #define fortravis
 using namespace std;
 
@@ -67,7 +67,7 @@ int main()
 			}
 		}
 	}
-	catch (TExeption ex) {
+	catch (TException ex) {
 		ex.Print();
 	}
 }
@@ -107,7 +107,7 @@ int main()
 		cout << A.GetEnd() << endl << endl;
 		return 0;
 	}
-	catch (TExeption ex)
+	catch (TException ex)
 	{
 		ex.Print();
 	}

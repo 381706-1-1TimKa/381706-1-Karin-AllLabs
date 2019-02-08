@@ -1,6 +1,6 @@
 #pragma once
 #include "Stack.h"
-#include "Exeption.h"
+#include "Exception.h"
 #include <string>
 using namespace std;
 
@@ -47,7 +47,7 @@ void TQueue<T>::Put(T A)
 {
 	if (IsFull())
 	{
-		TExeption Ex("full queue", "TQueue", "Put", 2);
+		TException Ex("full queue", "TQueue", "Put", 2);
 		throw Ex;
 	}
 	TStack<T>::mas[rear] = A;
@@ -60,7 +60,7 @@ T TQueue<T>::Get()
 {
 	if (IsEmpty())
 	{
-		TExeption Ex("empty queue", "TQueue", "Get", 3);
+		TException Ex("empty queue", "TQueue", "Get", 3);
 		throw Ex;
 	}
 	count--;

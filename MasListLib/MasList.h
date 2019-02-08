@@ -1,6 +1,6 @@
 #pragma once
 #include "Queue.h"
-#include "Exeption.h"
+#include "Exception.h"
 using namespace std;
 
 template <class T>
@@ -30,7 +30,7 @@ template <class T>
 TMasList<T>::TMasList(int _size) : freeElem(_size)
 {
 	if (_size <= 0) {
-		TExeption Ex("negative size", "MasList.h", "TMasList(int _size)", 1);
+		TException Ex("negative size", "MasList.h", "TMasList(int _size)", 1);
 		throw Ex;
 	}
 	size = _size;
@@ -79,7 +79,7 @@ template <class T>
 void TMasList<T>::PushStart(T elem)	//положить элемент в начало
 {
 	if (IsFull() == 1) {
-		TExeption Ex("Full list", "MasList.h", "PushStart", 2);
+		TException Ex("Full list", "MasList.h", "PushStart", 2);
 		throw Ex;
 	}
 	int ifree = freeElem.Get();
@@ -97,7 +97,7 @@ template <class T>
 void TMasList<T>::PushFinish(T elem)	//положить элемент в конец
 {
 	if (IsFull() == 1) {
-		TExeption Ex("Full list", "MasList.h", "PushFinish", 2);
+		TException Ex("Full list", "MasList.h", "PushFinish", 2);
 		throw Ex;
 	}
 	int ifree = freeElem.Get();
@@ -116,7 +116,7 @@ template <class T>
 T TMasList<T>::PullStart()	//взять первый элемент
 {
 	if (IsEmpty() == 1) {
-		TExeption Ex("Empty list", "MasList.h", "PullStart", 3);
+		TException Ex("Empty list", "MasList.h", "PullStart", 3);
 		throw Ex;
 	}
 	T elem = mas[start];
@@ -137,7 +137,7 @@ template <class T>
 T TMasList<T>::PullFinish()		//взять последний элемент
 {
 	if (IsEmpty() == 1){
-		TExeption Ex("Empty list", "MasList.h", "PullFinish", 3);
+		TException Ex("Empty list", "MasList.h", "PullFinish", 3);
 		throw Ex;
 }
 	T elem = mas[finish];

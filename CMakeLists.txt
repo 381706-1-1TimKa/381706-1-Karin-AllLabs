@@ -33,7 +33,7 @@ set (MasListTest MasListTest)
 
 
 
-set (Exeption Exeption)
+set (Exception Exception)
 
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
@@ -43,7 +43,7 @@ endif()
 
 
  #Создаем проект с именем из переменной ${PROJECT_NAME}, в него добавляются файлы из переменных ${srcs} и ${hdrs}
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib ${CMAKE_CURRENT_SOURCE_DIR}/StackLib ${CMAKE_CURRENT_SOURCE_DIR}/QueueLib ${CMAKE_CURRENT_SOURCE_DIR}/ListLib ${CMAKE_CURRENT_SOURCE_DIR}/StOnListLib ${CMAKE_CURRENT_SOURCE_DIR}/MStackLib ${CMAKE_CURRENT_SOURCE_DIR}/MasListLib ${CMAKE_CURRENT_SOURCE_DIR}/Exeption ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib ${CMAKE_CURRENT_SOURCE_DIR}/StackLib ${CMAKE_CURRENT_SOURCE_DIR}/QueueLib ${CMAKE_CURRENT_SOURCE_DIR}/ListLib ${CMAKE_CURRENT_SOURCE_DIR}/StOnListLib ${CMAKE_CURRENT_SOURCE_DIR}/MStackLib ${CMAKE_CURRENT_SOURCE_DIR}/MasListLib ${CMAKE_CURRENT_SOURCE_DIR}/Exception ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 add_subdirectory(Vector) #Собираем проект в поддиректории lib1
 add_subdirectory(VectorLib)
 add_subdirectory(VectorTest)
@@ -74,6 +74,6 @@ add_subdirectory (MasListTest)
 
 
 
-add_subdirectory (Exeption)
+add_subdirectory (Exception)
 add_subdirectory(gtest)
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}

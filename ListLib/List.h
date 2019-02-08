@@ -1,6 +1,6 @@
 #pragma once
 #include "Elem.h"
-#include "Exeption.h"
+#include "Exception.h"
 using namespace std;
 
 template <class T>
@@ -89,7 +89,7 @@ template <class T>
 void TList<T>::PutElem(T A, int n)
 {
 	if (n < 0) {
-		TExeption ex("Incorrect value", "List.h", "PutElem", 3);
+		TException ex("Incorrect value", "List.h", "PutElem", 3);
 		throw ex;
 	}
 
@@ -101,7 +101,7 @@ void TList<T>::PutElem(T A, int n)
 		TElem<T>* a = begin;
 		for (int i = 0; i < n-1; i++) {
 			if (a == 0) {
-				TExeption ex("Incorrect value", "List.h", "PutElem", 3);
+				TException ex("Incorrect value", "List.h", "PutElem", 3);
 				throw ex;
 			}
 			a = a->GetNext();
@@ -114,7 +114,7 @@ void TList<T>::PutElem(T A, int n)
 template <class T>
 T TList<T>::GetBegin(){
 	if (IsEmpty()) {
-		TExeption ex("Empty list", "List.h", "GetBegin", 2);
+		TException ex("Empty list", "List.h", "GetBegin", 2);
 		throw ex;
 	}
 	TElem<T>* a = begin;
@@ -127,7 +127,7 @@ T TList<T>::GetBegin(){
 template <class T>
 T TList<T>::GetEnd(){
 	if (IsEmpty()) {
-		TExeption ex("Empty list", "List.h", "GetEnd", 2);
+		TException ex("Empty list", "List.h", "GetEnd", 2);
 		throw ex;
 	}
 	TElem<T>* a;
@@ -155,12 +155,12 @@ T TList<T>::GetEnd(){
 template <class T>
 T TList<T>::GetElem(int ind) {
 	if (IsEmpty()) {
-		TExeption ex("Empty List", "List.h", "PutElem", 2);
+		TException ex("Empty List", "List.h", "PutElem", 2);
 		throw ex;
 	}
 	
 	if (ind < 0) {
-		TExeption ex("Incorrect value", "List.h", "PutElem", 3);
+		TException ex("Incorrect value", "List.h", "PutElem", 3);
 		throw ex;
 	}
 
@@ -172,7 +172,7 @@ T TList<T>::GetElem(int ind) {
 		for (int i = 0; i < ind-1; i++) {
 			a = a->GetNext();
 			if ((a->GetNext() == 0)||(a==0)) {
-				TExeption ex("Element not found", "List.h", "GetElem", 1);
+				TException ex("Element not found", "List.h", "GetElem", 1);
 				throw ex;
 			}
 		}

@@ -1,6 +1,6 @@
 #pragma once
 #include "List.h"
-#include "Exeption.h"
+#include "Exception.h"
 
 template <class T>
 class TStackList {
@@ -36,7 +36,7 @@ template <class T>
 T TStackList<T>::Get() {
 	if (IsEmpty())
 	{
-		TExeption Ex("empty", "StackList", "Get", 3);
+		TException Ex("empty", "StackList", "Get", 3);
 		throw Ex;
 	}
 	T temp;

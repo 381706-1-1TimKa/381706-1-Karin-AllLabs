@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Vector.h"
+#include "Vector.h";
 #include "Matrix.h"
 
 #define fortravis
@@ -67,7 +67,7 @@ int main()
 		Menu(n);
 		return 0;
 	}
-	catch (TExeption ex)
+	catch (TException ex)
 	{
 		ex.Print();
 	}

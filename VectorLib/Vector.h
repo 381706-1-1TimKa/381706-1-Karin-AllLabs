@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "Exeption.h"
+#include "Exception.h"
 using namespace std;
 template <class T>
 class TVector {
@@ -29,7 +29,7 @@ template <class T>
 TVector<T>::TVector(int n) {
 	if (n < 0) 
 		{
-			TExeption Ex("negative size", "Vector", "TVector", 1);
+			TException Ex("negative size", "Vector", "TVector", 1);
 			throw Ex;
 		}
 	size = n;
@@ -92,7 +92,7 @@ template <class T>
 T& TVector<T> :: operator[](int i) {
 	if ((i < 0) || (i >= size)) 
 		{
-			TExeption Ex("incorrect index", "Vector", "operator[]", 6);
+			TException Ex("incorrect index", "Vector", "operator[]", 6);
 			throw Ex;
 		}
 	return mas[i];
@@ -101,7 +101,7 @@ T& TVector<T> :: operator[](int i) {
 template <class T>
 TVector<T> TVector<T> :: operator+(const TVector<T> &A) {
 	if (size != A.size) {
-		TExeption Ex("different size", "Vector", "operator+", 7);
+		TException Ex("different size", "Vector", "operator+", 7);
 		throw Ex;
 	}
 	TVector<T> B(*this);
@@ -114,7 +114,7 @@ TVector<T> TVector<T> :: operator+(const TVector<T> &A) {
 template <class T>
 TVector<T> TVector<T> :: operator-(const TVector<T> &A) {
 	if (size != A.size) {
-		TExeption Ex("different size", "Vector", "operator-", 7);
+		TException Ex("different size", "Vector", "operator-", 7);
 		throw Ex;
 	}
 	TVector<T> B(*this);
@@ -127,7 +127,7 @@ TVector<T> TVector<T> :: operator-(const TVector<T> &A) {
 template <class T>
 T TVector<T> :: operator*(const TVector<T> &A) {
 	if (size != A.size) {
-		TExeption Ex("different size", "Vector", "operator*", 7);
+		TException Ex("different size", "Vector", "operator*", 7);
 		throw Ex;
 	}
 	T Sum = 0;

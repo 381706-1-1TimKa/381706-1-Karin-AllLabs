@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector.h"
 #include <iostream>
-#include "Exeption.h"
+#include "Exception.h"
 #include <string>
 using namespace std;
 //Для удобства обращения (индексации) и вывода матрицы сделаны нижнетреугольными
@@ -54,7 +54,7 @@ template <class T>
 TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& A) {
 	if (this->size != A.size)
 	{
-		TExeption Ex("different size", "Matrix", "operator*", 7);
+		TException Ex("different size", "Matrix", "operator*", 7);
 		throw Ex;
 	}
 	TMatrix<T> tmp(TVector<TVector<T> >::size);
@@ -75,7 +75,7 @@ TMatrix<T> TMatrix<T>::operator/(TMatrix<T>& A)
 {
 	if (this->size != A.size)
 		if (TMatrix<T>::size != A.size) {
-			TExeption Ex("different size", "Matrix", "operator*", 7);
+			TException Ex("different size", "Matrix", "operator*", 7);
 			throw Ex;
 		}
 	return (*this)*A.GetInvers();
@@ -98,7 +98,7 @@ TMatrix<T> TMatrix<T>::GetInvers()
 	T det = this->GetDet();
 	if ((det < 0.0001) && (det > -0.0001))
 	{
-		TExeption Ex("null determinant", "Matrix", "operator/", 8);
+		TException Ex("null determinant", "Matrix", "operator/", 8);
 		throw Ex;
 	}
 

@@ -85,7 +85,7 @@ int main()
 		}
 #endif
 	}
-	catch(TExeption ex)
+	catch(TException ex)
 	{
 		ex.Print();
 	}

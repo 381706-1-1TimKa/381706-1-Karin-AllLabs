@@ -1,6 +1,6 @@
 #pragma once
 #include "NewStack.h"
-#include "Exeption.h"
+#include "Exception.h"
 using namespace std;
 
 template <class T>
@@ -28,12 +28,12 @@ TMStack<T>::TMStack(int _n, int _size)
 {
 	if (_size < 1) 
 	{
-		TExeption Ex("incorrect size", "TMStack", "TMStack", 1);
+		TException Ex("incorrect size", "TMStack", "TMStack", 1);
 		throw Ex;
 	}
 	if (_n < 1)
 	{
-		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack", 4);
+		TException Ex("incorrect number of Stacks", "TMStack", "TMStack", 4);
 		throw Ex;
 	}
 	n = _n;
@@ -107,7 +107,7 @@ void TMStack<T>::Repack(int k)
 	int freeMem = GetFreeMem();
 	if (freeMem == 0)
 	{
-		TExeption Ex("no free memory", "TMStack", "Repack", 5);
+		TException Ex("no free memory", "TMStack", "Repack", 5);
 		throw Ex;
 	}
 	int addEv = freeMem / n;
@@ -154,7 +154,7 @@ void TMStack<T>::Put(int n1, T p)
 {
 	if ((n1 < 0) || (n1 >= n))
 	{
-		TExeption Ex("incorrect number of Stacks", "TMStack", "Put", 4);
+		TException Ex("incorrect number of Stacks", "TMStack", "Put", 4);
 		throw Ex;
 	}
 	if (IsFull(n1))
@@ -167,7 +167,7 @@ T TMStack<T>::Get(int n1)
 {
 	if ((n1 < 0) || (n1 >= n))
 	{
-		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
+		TException Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
 		throw Ex;
 	}
 	return h[n1]->TStack<T>::Get();
@@ -178,7 +178,7 @@ bool TMStack<T>::IsFull(int n1)
 {
 	if ((n1 < 0) || (n1 >= n))
 	{
-		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
+		TException Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
 		throw Ex;
 	}
 	return h[n1]->TStack<T>::IsFull();
@@ -189,7 +189,7 @@ bool TMStack<T>::IsEmpty(int n1)
 {
 	if ((n1 < 0) || (n1 > n))
 	{
-		TExeption Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
+		TException Ex("incorrect number of Stacks", "TMStack", "TMStack (int n, int size)", 4);
 		throw Ex;
 	}
 	return h[n1]->TStack<T>::IsEmpty();

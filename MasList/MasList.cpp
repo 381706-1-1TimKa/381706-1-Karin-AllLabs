@@ -61,7 +61,7 @@ int main()
 			}
 		}
 	}
-	catch (TExeption ex) {
+	catch (TException ex) {
 		ex.Print();
 	}
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "Exeption.h"
+#include "Exception.h"
 using namespace std;
 
 
