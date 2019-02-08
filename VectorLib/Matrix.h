@@ -38,16 +38,7 @@ template <class T>
 TMatrix<T>::TMatrix(const TMatrix<T>& A):TVector<TVector<T> >(A) {
 	
 }
-//TMatrix<T>::TMatrix (const TMatrix<T>& A){
-//	l = A.l;
-//	if (A.l > 0) {
-//		for (int i = 0; i < l; i++) {
-//			m[i] = TVector<T>(i + 1);
-//			for (int j = 0; j < i + 1; j++)
-//				m[i][j] = A.m[i][j];
-//		}
-//	}
-//}
+
 
 template <class T>
 TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &A) {
@@ -155,43 +146,9 @@ bool TMatrix<T>::operator!=(const TMatrix<T>& A)
 	TVector<TVector<T> >::operator!=(A);
 }
 
-//TMatrix<T>& TMatrix<T>::operator=(TMatrix<T>& A) {
-//	if (this == &A)
-//		return *this;
-//	if (l != A.l) {
-//		for (int i=0; i<l; i++)
-//			delete[] m[i];
-//		delete[] m;
-//		l = A.l;
-//		m = new TVector<T>[A.l];
-//		for (int i = 0; i < l; i++) {
-//			m[i] = TVector<T>(i + 1);
-//		}
-//	}
-//	for (int i = 0; i < l; i++)
-//		for (int j = 0; j < i + 1; j++)
-//			m[i][j] = A.m[i][j];
-//	return *this;
-//}
-
 template <class T>
 TMatrix<T>::TMatrix(const TVector<TVector<T> > &A) : TVector<TVector<T> >(A) {};
 
-//template <class T>
-//T TMatrix<T>::Get(int row, int col) {
-//	if (row < col)
-//		throw 5;
-//	else
-//		return m[row][col];
-//}
-//
-//template <class T>
-//void Set(int row, int col, T val) {
-//	if (row < col)
-//		throw 5;
-//	else
-//		m[row][col] = val;
-//}
 
 template <class T1>
 ostream& operator<<(ostream& ostr, TMatrix<T1> &A) {

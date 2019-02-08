@@ -90,7 +90,7 @@ bool TVector<T>::operator!=(const TVector &A) {
 
 template <class T>
 T& TVector<T> :: operator[](int i) {
-	if ((i < 0) || (i > size)) 
+	if ((i < 0) || (i >= size)) 
 		{
 			TExeption Ex("incorrect index", "Vector", "operator[]", 6);
 			throw Ex;
