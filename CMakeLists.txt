@@ -31,7 +31,9 @@ set (MasList MasList)
 set (MasListLib MasListLib)
 set (MasListTest MasListTest)
 
-
+#set (Polinom Polinom)
+#set (PolinomLib PolinomLib)
+#set (PolinomTest PolinomTest)
 
 set (Exception Exception)
 
@@ -43,37 +45,49 @@ endif()
 
 
  #Создаем проект с именем из переменной ${PROJECT_NAME}, в него добавляются файлы из переменных ${srcs} и ${hdrs}
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib ${CMAKE_CURRENT_SOURCE_DIR}/StackLib ${CMAKE_CURRENT_SOURCE_DIR}/QueueLib ${CMAKE_CURRENT_SOURCE_DIR}/ListLib ${CMAKE_CURRENT_SOURCE_DIR}/StOnListLib ${CMAKE_CURRENT_SOURCE_DIR}/MStackLib ${CMAKE_CURRENT_SOURCE_DIR}/MasListLib ${CMAKE_CURRENT_SOURCE_DIR}/Exception ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VectorLib) #${CMAKE_CURRENT_SOURCE_DIR}/StackLib ${CMAKE_CURRENT_SOURCE_DIR}/QueueLib ${CMAKE_CURRENT_SOURCE_DIR}/ListLib ${CMAKE_CURRENT_SOURCE_DIR}/StOnListLib ${CMAKE_CURRENT_SOURCE_DIR}/MStackLib ${CMAKE_CURRENT_SOURCE_DIR}/MasListLib ${CMAKE_CURRENT_SOURCE_DIR}/PolinomLib ${CMAKE_CURRENT_SOURCE_DIR}/Exception ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 add_subdirectory(Vector) #Собираем проект в поддиректории lib1
 add_subdirectory(VectorLib)
 add_subdirectory(VectorTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackLib)
 add_subdirectory(Stack)
 add_subdirectory(StackLib)
 add_subdirectory(StackTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/QueueLib)
 add_subdirectory (Queue)
 add_subdirectory (QueueLib)
 add_subdirectory (QueueTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ListLib)
 add_subdirectory (List)
 add_subdirectory (ListLib)
 add_subdirectory (ListTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StOnListLib)
 add_subdirectory (StOnList)
 add_subdirectory (StOnListLib)
 add_subdirectory (StOnListTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MStackLib)
 add_subdirectory (MStack)
 add_subdirectory (MStackLib)
 add_subdirectory (MStackTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MasListLib)
 add_subdirectory (MasList)
 add_subdirectory (MasListLib)
 add_subdirectory (MasListTest)
 
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolinomLib)
+#add_subdirectory (Polinom)
+#add_subdirectory (PolinomLib)
+#add_subdirectory (PolinomTest)
 
-
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Exeption)
 add_subdirectory (Exception)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 add_subdirectory(gtest)
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}
