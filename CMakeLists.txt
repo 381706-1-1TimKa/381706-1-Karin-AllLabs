@@ -85,7 +85,7 @@ add_subdirectory (MasListTest)
 #add_subdirectory (PolinomLib)
 #add_subdirectory (PolinomTest)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Exeption)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Exception)
 add_subdirectory (Exception)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/gtest)
