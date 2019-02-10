@@ -1,7 +1,7 @@
 #pragma once
 #include "Vector.h"
 #include <iostream>
-#include "Exception.h"
+#include "../Exception/Exception.h"
 #include <string>
 using namespace std;
 //Для удобства обращения (индексации) и вывода матрицы сделаны нижнетреугольными
