@@ -1,6 +1,6 @@
 #pragma once
 #include "Queue.h"
-#include "Exception.h"
+#include "../Exception/Exception.h"
 using namespace std;
 
 template <class T>

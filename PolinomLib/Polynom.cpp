@@ -52,11 +52,9 @@ TPolynom::TPolynom(TPolynom &p) {
 	if (p.start == 0)
 	{
 		start = 0;
-		end = 0;
 	}
 	else
 	{
-		n = p.n;
 		TMonom *i = new TMonom(*p.start);
 		//
 

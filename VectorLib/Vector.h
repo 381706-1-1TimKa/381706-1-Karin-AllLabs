@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "Exception.h"
+#include "../Exception/Exception.h"
 using namespace std;
 template <class T>
 class TVector {

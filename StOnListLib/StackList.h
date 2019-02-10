@@ -1,6 +1,6 @@
 #pragma once
 #include "List.h"
-#include "Exception.h"
+#include "../Exception/Exception.h"
 
 template <class T>
 class TStackList {

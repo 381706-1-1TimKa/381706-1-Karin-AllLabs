@@ -1,6 +1,6 @@
 #pragma once
 #include "Stack.h"
-#include "Exception.h"
+#include "../Exception/Exception.h"
 #include <string>
 using namespace std;
 

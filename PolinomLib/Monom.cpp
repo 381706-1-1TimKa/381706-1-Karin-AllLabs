@@ -88,7 +88,7 @@ TMonom& TMonom::operator =(TMonom& monom)
 	return *(this);
 }
 
-TMonom& TMonom::operator +(TMonom& monom)
+TMonom TMonom::operator+(TMonom& monom)
 {
 	if ((n != monom.n) || !(*this == monom))
 		throw 1;
@@ -97,7 +97,7 @@ TMonom& TMonom::operator +(TMonom& monom)
 	return temp;
 }
 
-TMonom& TMonom::operator -(TMonom& monom)
+TMonom TMonom::operator -(TMonom& monom)
 {
 	if ((n != monom.n) || !(*this == monom))
 		throw 1;
@@ -106,8 +106,8 @@ TMonom& TMonom::operator -(TMonom& monom)
 	return temp;
 }
 
-TMonom& TMonom::operator*(TMonom& monom){
-	if (n != monom.n || !(*this == monom))
+TMonom TMonom::operator*(TMonom& monom){
+	if (n != monom.n)
 		throw 1;
 	TMonom temp(*this);
 	temp.c = c * monom.c;

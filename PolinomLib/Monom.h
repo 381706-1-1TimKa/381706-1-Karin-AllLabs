@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "Exception.h"
+#include "../Exception/Exception.h"
 class TMonom {
 protected:
 	TMonom* next;//Указатель на следующий
@@ -21,9 +21,9 @@ public:
 	void SetC(double _c);// Коэффициент
 
 	TMonom& operator =(TMonom& monom);
-	TMonom& operator +(TMonom& monom);
-	TMonom& operator -(TMonom& monom);
-	TMonom& operator*(TMonom& monom);
+	TMonom operator +(TMonom& monom);
+	TMonom operator -(TMonom& monom);
+	TMonom operator*(TMonom& monom);
 	bool operator ==(TMonom& monom);
 	bool operator >(TMonom& monom);
 	bool operator <(TMonom& monom);
