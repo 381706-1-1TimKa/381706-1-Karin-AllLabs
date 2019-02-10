@@ -1,6 +1,6 @@
 #include <iostream>
 #include "MStack.h"
-//#define _IO_EXAMPLE_
+#define fortravis
 using namespace std;
 
 int ChoiceStack(TMStack<int> &S);
@@ -14,21 +14,21 @@ int main()
 		cout << "Enter size of your Multistack and" << endl;
 		cout << "number of stacks"<<endl;
 		int n, size;
-#ifdef _IO_EXAMPLE_
+#ifndef fortravis
 		cin >> size;
 		cin >> n;
 #endif
-#ifndef _IO_EXAMPLE_
+#ifdef fortravis
 		n = 5;
 		size = 10;
 #endif
 		TMStack <int> S(n, size);
-#ifdef _IO_EXAMPLE_
+#ifndef fortravis
 		Menu(S);
 		return 0;
 #endif
 
-#ifndef _IO_EXAMPLE_
+#ifdef fortravis
 		S.Put(0, 5);
 		S.Put(1, 6);
 		S.Put(2, 21);

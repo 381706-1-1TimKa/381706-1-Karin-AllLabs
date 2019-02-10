@@ -1,6 +1,6 @@
 #include <iostream>
 #include "List.h"
-#include "Exception.h"
+#include "../Exception/Exception.h"
 #define fortravis
 using namespace std;
 
