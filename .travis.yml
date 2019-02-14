@@ -22,5 +22,7 @@ script:
   - ./MStackTest/MStackTest
   - ./List/List
   - ./ListTest/ListTest
+  - ./Polynom/Polynom
+  - ./PolynomTest/PolynomTest
 notifications:
   email: false

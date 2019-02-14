@@ -24,7 +24,7 @@ TMonom::TMonom(int _n, unsigned* _power, double _c) :n(_n)
 	next = 0;
 }
 
-TMonom::TMonom(TMonom& monom) : n(monom.n)
+TMonom::TMonom(const TMonom& monom) : n(monom.n)
 {
 	c = monom.c;
 	next = monom.next;
@@ -74,7 +74,7 @@ void TMonom::SetC(double _c)
 }
 
 
-TMonom& TMonom::operator =(TMonom& monom)
+TMonom& TMonom::operator =(const TMonom& monom)
 {
 	if (this != &monom)
 	{
@@ -97,6 +97,14 @@ TMonom TMonom::operator+(TMonom& monom)
 	return temp;
 }
 
+TMonom& TMonom::operator+=(TMonom& monom)
+{
+	if ((n != monom.n) || !(*this == monom))
+		throw 1;
+	c = c + monom.c;
+	return *this;
+}
+
 TMonom TMonom::operator -(TMonom& monom)
 {
 	if ((n != monom.n) || !(*this == monom))
@@ -106,7 +114,8 @@ TMonom TMonom::operator -(TMonom& monom)
 	return temp;
 }
 
-TMonom TMonom::operator*(TMonom& monom){
+TMonom TMonom::operator*(TMonom& monom)const
+{
 	if (n != monom.n)
 		throw 1;
 	TMonom temp(*this);
@@ -114,6 +123,23 @@ TMonom TMonom::operator*(TMonom& monom){
 	for (int i = 0; i < n; i++)
 		temp.power[i] += monom.power[i];
 	return temp;
+}
+
+TMonom TMonom::operator*(int a)
+{
+	TMonom temp(*this);
+	temp.c = temp.c*a;
+	return temp;
+}
+
+TMonom& TMonom::operator*=(TMonom& monom)
+{
+	if (n != monom.n)
+		throw 1;
+	c = c * monom.c;
+	for (int i = 0; i < n; i++)
+		power[i] += monom.power[i];
+	return *this;
 }
 
 
@@ -136,10 +162,12 @@ bool TMonom::operator >(TMonom& monom)
 	for (int i = 0; i < n; i++) {
 		if (power[i] < monom.power[i])
 			return false;
+		if (power[i] > monom.power[i])
+			return true;
 	}
-	return true;
-
+	return false;
 }
+
 bool TMonom::operator <(TMonom& monom)
 {
 	if (n != monom.n)
@@ -147,8 +175,10 @@ bool TMonom::operator <(TMonom& monom)
 	for (int i = 0; i < n; i++) {
 		if (power[i] > monom.power[i])
 			return false;
+		if (power[i] < monom.power[i])
+			return true;
 	}
-	return true;
+	return false;
 
 }
 
@@ -174,6 +204,8 @@ std::ostream& operator << (std::ostream& _s, TMonom& Tm)
 				_s << "x" << i;
 				if (Tm.power[i] != 1)
 					_s << "^" << Tm.power[i] << " ";
+				else
+					_s << " ";
 			}
 	}
 	return _s;

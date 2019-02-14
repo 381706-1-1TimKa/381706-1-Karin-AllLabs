@@ -9,8 +9,8 @@ protected:
 	const int n;//Кол-во переменных
 public:
 	TMonom(int _n, unsigned* _power, double c);
-	~TMonom();
-	TMonom(TMonom& monom);
+	virtual ~TMonom();
+	TMonom(const TMonom& monom);
 	TMonom* GetNext();//Указатель на следующий
 	unsigned* GetPower();//Степени
 	double GetC();// Коэффициент
@@ -20,10 +20,13 @@ public:
 	void SetPower(unsigned* _power);//Степени
 	void SetC(double _c);// Коэффициент
 
-	TMonom& operator =(TMonom& monom);
+	TMonom& operator =(const TMonom& monom);
 	TMonom operator +(TMonom& monom);
+	TMonom& operator+=(TMonom& monom);
 	TMonom operator -(TMonom& monom);
-	TMonom operator*(TMonom& monom);
+	TMonom operator*(TMonom& monom)const;
+	TMonom operator*(int a);
+	TMonom& operator *=(TMonom& monom);
 	bool operator ==(TMonom& monom);
 	bool operator >(TMonom& monom);
 	bool operator <(TMonom& monom);
