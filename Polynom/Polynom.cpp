@@ -2,10 +2,9 @@
 #include "Polynom.h"
 using namespace std;
 
-//#define fortravis
+#define fortravis
 
 #ifndef fortravis
-void Menu(TPolynom& P);
 
 int main()
 {
