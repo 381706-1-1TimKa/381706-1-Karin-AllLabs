@@ -31,9 +31,9 @@ set (MasList MasList)
 set (MasListLib MasListLib)
 set (MasListTest MasListTest)
 
-set (Polynom Polinom)
-set (PolynomLib PolinomLib)
-set (PolynomTest PolinomTest)
+set (Polynom Polynom)
+set (PolynomLib PolynomLib)
+set (PolynomTest PolynomTest)
 
 set (Exception Exception)
 
