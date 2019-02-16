@@ -3,7 +3,10 @@
 TPolynom::TPolynom(int _n)
 {
 	if (_n <= 0)
-		throw 1;
+	{
+		TException ex("Incorrect number of variables", "Polynom.cpp", "TPolynom", 1);
+		throw ex;
+	}
 	n = _n;
 	start = 0;
 }
@@ -22,7 +25,13 @@ TPolynom::~TPolynom()
 	start = 0;
 }
 
-TPolynom TPolynom::operator+ (TPolynom &p) {
+TPolynom TPolynom::operator+ (TPolynom &p) 
+{
+	if (this->n != p.n)
+	{
+		TException ex ("Different number of variables", "Polynom.cpp", "Operator = ", 3);
+		throw ex;
+	}
 	TPolynom temp(n);
 	TMonom *i1 = start, *i2 = p.start, *i = 0; 
 	while ((i1 != 0) && (i2 != 0))
@@ -118,7 +127,10 @@ TPolynom& TPolynom::operator=(const TPolynom &p)
 TPolynom& TPolynom::operator+=(TMonom &m)
 {
 	if (this->n != m.GetN())
-		throw 1;
+	{
+		TException ex("Different number of variables", "Polynom.cpp", "Operator+=", 3);
+		throw ex;
+	}
 	if (m.GetC() == 0)
 		return *this;
 	if (start == 0) //Если полином пустой
