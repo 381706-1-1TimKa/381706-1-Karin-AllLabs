@@ -86,6 +86,7 @@ int main()
 	cout << "P1 = " << P1 << endl;
 	cout << "P2 = " << P2 << endl;
 	cout << "P3 = " << P3 << endl;
+
 	return 0;
 }
 

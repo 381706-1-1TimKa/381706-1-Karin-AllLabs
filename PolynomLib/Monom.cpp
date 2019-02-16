@@ -148,6 +148,7 @@ TMonom TMonom::operator -(TMonom& monom)
 
 TMonom TMonom::operator*(TMonom& monom)const
 {
+	if (this->n != monom.n)
 	{
 		TException ex("Different number of variables", "Monom.cpp", "operator*", 3);
 		throw ex;
