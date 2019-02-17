@@ -3,19 +3,21 @@
 
 TEST(String, can_create)
 {
-	char str[15] = "this is string";
+	char str[] = "this is string";
 	ASSERT_NO_THROW(TString S(str));
 }
 
 TEST(String, can_get_length)
 {
-	TString S("this is string too");
+	char str[] = "this is string too";
+	TString S(str);
 	ASSERT_TRUE(S.GetLength() == 19);
 }
 
 TEST(String, can_copy)
 {
-	TString S("this is string");
+	char str[] = "this is string";
+	TString S(str);
 	TString Scopy(S);
 	ASSERT_TRUE(S[0] == 't');
 	ASSERT_TRUE(S[2] == 'i');
@@ -27,7 +29,8 @@ TEST(String, can_copy)
 
 TEST(String, can_assign)
 {
-	TString S("this is string");
+	char str[] = "this is string";
+	TString S(str);
 	TString S1;
 	S1 = S;
 	ASSERT_TRUE(S[0] == 't');
@@ -40,8 +43,10 @@ TEST(String, can_assign)
 
 TEST(String, can_add)
 {
-	TString S1("This is string");
-	TString S2("And it's too");
+	char str1[] = "This is string";
+	char str2[] = "And it's too";
+	TString S1(str1);
+	TString S2(str2);
 	TString S3;
 	S3 = S1 + S2;
 	ASSERT_TRUE(S3[0] == 'T');
@@ -69,31 +74,36 @@ TEST(RPN, can_spot_operator)
 
 TEST(RPN, can_add)
 {
-	TString S = "25+54+87";
+	char str[] = "25+54+87";
+	TString S(str);
 	ASSERT_TRUE(Result(S) == 166);
 }
 
 TEST(RPN, can_subtrack)
 {
-	TString S = "25-54-87";
+	char str[] = "25-54-87";
+	TString S (str);
 	ASSERT_TRUE(Result(S) == -116);
 }
 
 TEST(RPN, can_multiplicate)
 {
-	TString S = "25*54*87";
+	char str[] = "25*54*87";
+	TString S(str);
 	ASSERT_TRUE(Result(S) == 117450);
 }
 
 TEST(RPN, can_divide)
 {
-	TString S = "56/2/7";
+	char str[] = "56/2/7";
+	TString S(str);
 	ASSERT_TRUE(Result(S) == 4);
 }
 
 TEST(RPN, can_translate_to_RPN_without_parentheses_and_muli_digit_numbers)
 {
-	TString S1("3*2*6-5*8-6+8*7");
+	char str[] = "3*2*6-5*8-6+8*7";
+	TString S1(str);
 	TQueue<char> Q(3*S1.GetLength());
 	Q = StrToRPN(S1);
 	ASSERT_TRUE(Q.Get() == '[');
@@ -132,7 +142,8 @@ TEST(RPN, can_translate_to_RPN_without_parentheses_and_muli_digit_numbers)
 
 TEST(RPN, can_count_RPN_without_parentheses_and_muli_digit_numbers)
 {
-	TString S1("3*2*6-5*8-6+8*7");
+	char str[] = "3*2*6-5*8-6+8*7";
+	TString S1(str);
 	TQueue<char> Q(3 * S1.GetLength());
 	Q = StrToRPN(S1);
 	double res = Calculate(Q);
@@ -141,7 +152,8 @@ TEST(RPN, can_count_RPN_without_parentheses_and_muli_digit_numbers)
 
 TEST(RPN, can_translate_to_RPN_with_parentheses_and_muli_digit_numbers)
 {
-	TString S1("(32*6-5)*((82-64)+85)*7");
+	char str[] = "(32*6-5)*((82-64)+85)*7";
+	TString S1(str);
 	TQueue<char> Q(3 * S1.GetLength());
 	Q = StrToRPN(S1);
 	ASSERT_TRUE(Q.Get() == '[');
@@ -180,7 +192,8 @@ TEST(RPN, can_translate_to_RPN_with_parentheses_and_muli_digit_numbers)
 
 TEST(RPN, can_count_RPN_with_parentheses_and_muli_digit_numbers)
 {
-	TString S1("(32*6-5)*((82-64)+85)*7");
+	char str[] = "(32*6-5)*((82-64)+85)*7";
+	TString S1(str);
 	TQueue<char> Q(3 * S1.GetLength());
 	Q = StrToRPN(S1);
 	double res = Calculate(Q);
@@ -189,19 +202,22 @@ TEST(RPN, can_count_RPN_with_parentheses_and_muli_digit_numbers)
 
 TEST(RPN, can_spot_incorrect_parentheses)
 {
-	TString S1("(32*6-5*((82-64)+85)*7");
+	char str[] = "(32*6-5*((82-64)+85)*7";
+	TString S1(str);
 	ASSERT_ANY_THROW(Result(S1));
 }
 
 TEST(RPN, can_spot_incorrect_operators)
 {
-	TString S1("(32*6-+5)*((82-64)+85)*7");
+	char str[] = "(32*6-+5)*((82-64)+85)*7";
+	TString S1(str);
 	ASSERT_ANY_THROW(Result(S1));
 }
 
 TEST(RPN, can_result_if_first_symbol_is_minus)
 {
-	TString S1("-(32*6-5)*((82-64)+85)*7");
+	char str[] = "-(32*6-5)*((82-64)+85)*7";
+	TString S1(str);
 	ASSERT_TRUE(Result(S1) == -134827);
 }
 
