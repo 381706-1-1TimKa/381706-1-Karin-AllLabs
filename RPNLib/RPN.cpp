@@ -154,3 +154,12 @@ double Calculate(TQueue<char> queue)
 		throw TException("Incorrect string", "RPN.cpp", "Calculate", 3);
 	return result;
 }
+
+double Result(TString& A)
+{
+	TQueue<char> q(3 * A.GetLength());
+	q = StrToRPN(A);
+	double res;
+	res = Calculate(q);
+	return res;
+}
