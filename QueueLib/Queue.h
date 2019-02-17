@@ -13,6 +13,7 @@ protected:
 public:
 	TQueue(int n);
 	TQueue(TQueue<T> &A);
+	TQueue& operator=(const TQueue& A);
 	~TQueue();
 	void Put(T A);
 	T Get();
@@ -41,6 +42,34 @@ TQueue<T>::~TQueue()
 {
 	count = 0;
 	rear = 0;
+}
+
+
+template <class T>
+TQueue<T>& TQueue<T>::operator=(const TQueue<T>& A)
+{
+	rear = A.rear;
+	count = A.count;
+	if (TStack<T>::size != A.TStack<T>::size)
+	{
+		delete TStack<T>::mas;
+		size = A.TStack<T>::size;
+		if (TStack<T>::size != 0)
+			TStack<T>::mas = new T[TStack<T>::size];
+	}
+	if (TStack<T>::size != 0)
+	{
+		TStack<T>::top = A.TStack<T>::top;
+		for (int i = 0; i < size; i++)
+			TStack<T>::mas[i] = A.TStack<T>::mas[i];
+	}
+	else
+	{
+		TStack<T>::mas = 0;
+		TStack<T>::top = 0;
+
+	}
+	return *this;
 }
 
 template <class T>

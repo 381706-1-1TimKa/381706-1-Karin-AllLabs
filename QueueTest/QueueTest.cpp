@@ -17,6 +17,16 @@ TEST(Queue, can_put_and_get) {
 	ASSERT_EQ(8, A.Get());
 }
 
+TEST(Queue, can_assignment)
+{
+	TQueue<int> Q(5);
+	Q.Put(7);
+	Q.Put(8);
+	TQueue<int> A(5);
+	A=Q;
+	ASSERT_EQ(7, A.Get());
+	ASSERT_EQ(8, A.Get());
+}
 
 TEST(Queue, can_recognize_Full_Queue) {
 	TQueue<int> A(5);
