@@ -70,25 +70,25 @@ TEST(RPN, can_spot_operator)
 TEST(RPN, can_add)
 {
 	TString S = "25+54+87";
-	ASSERT_EQ(Result(S), 166);
+	ASSERT_TRUE(Result(S) == 166);
 }
 
 TEST(RPN, can_subtrack)
 {
 	TString S = "25-54-87";
-	ASSERT_EQ(Result(S), -116);
+	ASSERT_TRUE(Result(S) == -116);
 }
 
 TEST(RPN, can_multiplicate)
 {
 	TString S = "25*54*87";
-	ASSERT_EQ(Result(S), 117450);
+	ASSERT_TRUE(Result(S) == 117450);
 }
 
 TEST(RPN, can_divide)
 {
 	TString S = "56/2/7";
-	ASSERT_EQ(Result(S), 4);
+	ASSERT_TRUE(Result(S) == 4);
 }
 
 TEST(RPN, can_translate_to_RPN_without_parentheses_and_muli_digit_numbers)
@@ -184,7 +184,7 @@ TEST(RPN, can_count_RPN_with_parentheses_and_muli_digit_numbers)
 	TQueue<char> Q(3 * S1.GetLength());
 	Q = StrToRPN(S1);
 	double res = Calculate(Q);
-	ASSERT_EQ(res, 134827);
+	ASSERT_TRUE(res == 134827);
 }
 
 TEST(RPN, can_spot_incorrect_parentheses)
@@ -202,7 +202,7 @@ TEST(RPN, can_spot_incorrect_operators)
 TEST(RPN, can_result_if_first_symbol_is_minus)
 {
 	TString S1("-(32*6-5)*((82-64)+85)*7");
-	ASSERT_EQ(Result(S1), -134827);
+	ASSERT_TRUE(Result(S1) == -134827);
 }
 
 
