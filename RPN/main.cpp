@@ -4,12 +4,21 @@ using namespace std;
 
 #define fortravis
 
-#ifndef fortravis
 int main()
 {
 	cout << "Enter string" << endl;
 	TString str;
+
+#ifndef fortravis
 	cin >> str;
+#endif
+
+#ifdef fortravis
+	TString s1("3*2*(45-31)/6+(56-(2+8)/2)");
+	str = s1;
+	cout << "3 * 2 * (45 - 31) / 6 + (56 - (2 + 8) / 2)" << endl;
+#endif
+
 	TQueue<char> q(3 * str.GetLength());
 	q = StrToRPN(str);
 	double res;
@@ -21,4 +30,3 @@ int main()
 	cout << res << endl;
 	return 0;
 }
-#endif
