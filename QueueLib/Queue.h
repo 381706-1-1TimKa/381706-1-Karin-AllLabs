@@ -13,7 +13,7 @@ protected:
 public:
 	TQueue(int n);
 	TQueue(TQueue<T> &A);
-	TQueue& operator=(TQueue& A);
+	TQueue& operator=(const TQueue& A);
 	~TQueue();
 	void Put(T A);
 	T Get();
@@ -45,7 +45,7 @@ TQueue<T>::~TQueue()
 }
 
 template <class T>
-TQueue<T>& TQueue<T>::operator=(TQueue<T>& A)
+TQueue<T>& TQueue<T>::operator=(const TQueue<T>& A)
 {
 	TStack<T>::operator=(A);
 	rear = A.rear;
