@@ -12,7 +12,7 @@ public:
 	~TString();
 
 	int GetLength();
-	TString& operator=(TString& _str);
+	TString& operator=(const TString& _str);
 	TString operator+(TString& _str);
 	char& operator[] (int i);
 

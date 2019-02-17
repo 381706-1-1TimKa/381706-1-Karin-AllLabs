@@ -52,7 +52,7 @@ int TString::GetLength()
 	return len;
 }
 
-TString& TString::operator=(TString& _str)
+TString& TString::operator=(const TString& _str)
 {
 	if (this == &_str)
 		return *this;
