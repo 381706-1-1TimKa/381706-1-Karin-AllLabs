@@ -12,8 +12,10 @@ public:
 	TStack<T> (int n=0);
 	TStack<T> (TStack<T> &A);
 	virtual ~TStack<T>();
+	TStack<T>& operator= (TStack<T> S);
 	void Put (T A);
 	T Get();
+	T Top();
 	int GetSize();
 	bool IsFull();
 	bool IsEmpty();
@@ -60,6 +62,30 @@ TStack<T>::~TStack() {
 }
 
 template <class T>
+TStack<T>& TStack<T>::operator=(TStack<T> S)
+{
+	if (size != S.size)
+	{
+		delete mas;
+		size = S.size;
+		if (size != 0)
+			mas = new T[size];
+	}
+	if (size != 0) 
+	{
+		top = S.top;
+		for (int i = 0; i < size; i++)
+			mas[i] = S.mas[i];
+	}
+	else
+	{
+		mas = 0;
+		top = 0;
+	}
+	return *this;
+}
+
+template <class T>
 void TStack<T>::Put(T A) {
 	if (IsFull())
 	{
@@ -80,6 +106,18 @@ T TStack<T>::Get(){
 	else {
 		top--;
 		return mas[top];
+	}
+}
+
+template <class T>
+T TStack<T>::Top() {
+	if (IsEmpty())
+	{
+		TException Ex("empty stack", "Stack.h", "Get", 3);
+		throw Ex;
+	}
+	else {
+		return mas[top-1];
 	}
 }
 

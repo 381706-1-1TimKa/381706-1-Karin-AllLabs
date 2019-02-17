@@ -24,5 +24,7 @@ script:
   - ./ListTest/ListTest
   - ./Polynom/Polynom
   - ./PolynomTest/PolynomTest
+  - ./RPN/RPN
+  - ./RPNTest/RPNTest
 notifications:
   email: false

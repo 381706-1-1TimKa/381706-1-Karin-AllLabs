@@ -38,6 +38,22 @@ TEST(Stack, can_put_and_get) {
 	ASSERT_EQ(1, S.Get());
 }
 
+TEST(Stack, can_assignment)
+{
+	TStack<double> S(5);
+	S.Put(1);
+	S.Put(2);
+	S.Put(3);
+	S.Put(4);
+	TStack<double> S1(5);
+	S1 = S;
+	ASSERT_EQ(4, S1.Get());
+	ASSERT_EQ(3, S1.Get());
+	ASSERT_EQ(2, S1.Get());
+	ASSERT_EQ(1, S1.Get());
+
+}
+
 TEST(Stack, can_not_put_in_full_stack) {
 	TStack<double> S(5);
 	S.Put(5);

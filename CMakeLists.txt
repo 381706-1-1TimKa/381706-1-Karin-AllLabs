@@ -35,6 +35,10 @@ set (Polynom Polynom)
 set (PolynomLib PolynomLib)
 set (PolynomTest PolynomTest)
 
+set (RPN RPN)
+set (RPNLib RPNLib)
+set (RPNTest RPNTest)
+
 set (Exception Exception)
 
 
@@ -90,5 +94,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolynomLib)
 add_subdirectory (Polynom)
 add_subdirectory (PolynomLib)
 add_subdirectory (PolynomTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/RPNLib)
+add_subdirectory (RPN)
+add_subdirectory (RPNLib)
+add_subdirectory (RPNTest)
 
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}

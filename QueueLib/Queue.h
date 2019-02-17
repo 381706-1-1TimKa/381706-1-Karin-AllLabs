@@ -13,9 +13,11 @@ protected:
 public:
 	TQueue(int n);
 	TQueue(TQueue<T> &A);
+	TQueue& operator=(TQueue& A);
 	~TQueue();
 	void Put(T A);
 	T Get();
+	T Top();
 	int GetCount();
 	bool IsFull();
 	bool IsEmpty();
@@ -43,6 +45,15 @@ TQueue<T>::~TQueue()
 }
 
 template <class T>
+TQueue<T>& TQueue<T>::operator=(TQueue<T>& A)
+{
+	TStack<T>::operator=(A);
+	rear = A.rear;
+	count = A.count;
+	return *this;
+}
+
+template <class T>
 void TQueue<T>::Put(T A) 
 {
 	if (IsFull())
@@ -67,6 +78,17 @@ T TQueue<T>::Get()
 	int t1 = TStack<T>::top;
 	TStack<T>::top = (TStack<T>::top + 1) % TStack<T>::size;
 	return TStack<T>::mas[t1];
+}
+
+template <class T>
+T TQueue<T>::Top()
+{
+	if (IsEmpty())
+	{
+		TException Ex("empty queue", "TQueue", "Get", 3);
+		throw Ex;
+	}
+	return TStack<T>::mas[top];
 }
 
 template <class T>
