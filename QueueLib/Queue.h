@@ -53,14 +53,14 @@ TQueue<T>& TQueue<T>::operator=(const TQueue<T>& A)
 	if (TStack<T>::size != A.TStack<T>::size)
 	{
 		delete TStack<T>::mas;
-		size = A.TStack<T>::size;
+		TStack<T>::size = A.TStack<T>::size;
 		if (TStack<T>::size != 0)
 			TStack<T>::mas = new T[TStack<T>::size];
 	}
 	if (TStack<T>::size != 0)
 	{
 		TStack<T>::top = A.TStack<T>::top;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < TStack<T>::size; i++)
 			TStack<T>::mas[i] = A.TStack<T>::mas[i];
 	}
 	else
