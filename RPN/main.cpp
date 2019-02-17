@@ -2,6 +2,9 @@
 #include "RPN.h"
 using namespace std;
 
+#define fortravis
+
+#ifndef fortravis
 int main()
 {
 	cout << "Enter string" << endl;
@@ -18,3 +21,4 @@ int main()
 	cout << res << endl;
 	return 0;
 }
+#endif
