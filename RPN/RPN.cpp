@@ -2,7 +2,7 @@
 #include "RPN.h"
 using namespace std;
 
-//#define fortravis
+#define fortravis
 
 int main()
 {
