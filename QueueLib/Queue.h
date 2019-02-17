@@ -88,7 +88,7 @@ T TQueue<T>::Top()
 		TException Ex("empty queue", "TQueue", "Get", 3);
 		throw Ex;
 	}
-	return TStack<T>::mas[top];
+	return TStack<T>::mas[TStack<T>::top];
 }
 
 template <class T>

@@ -1,5 +1,6 @@
 #include "RPN.h"
 #include "../Exception/Exception.h"
+#include <cstdlib>
 
 int GetPrior(const char c)
 {
