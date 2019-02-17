@@ -13,7 +13,6 @@ protected:
 public:
 	TQueue(int n);
 	TQueue(TQueue<T> &A);
-	TQueue& operator=(const TQueue& A);
 	~TQueue();
 	void Put(T A);
 	T Get();
@@ -42,15 +41,6 @@ TQueue<T>::~TQueue()
 {
 	count = 0;
 	rear = 0;
-}
-
-template <class T>
-TQueue<T>& TQueue<T>::operator=(const TQueue<T>& A)
-{
-	TStack<T>::operator=(A);
-	rear = A.rear;
-	count = A.count;
-	return *this;
 }
 
 template <class T>

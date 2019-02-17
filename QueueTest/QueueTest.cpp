@@ -23,7 +23,7 @@ TEST(Queue, can_assignment)
 	Q.Put(7);
 	Q.Put(8);
 	TQueue<int> A(5);
-	A = Q;
+	A=Q;
 	ASSERT_EQ(7, A.Get());
 	ASSERT_EQ(8, A.Get());
 }
