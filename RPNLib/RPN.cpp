@@ -100,12 +100,12 @@ TQueue<char> StrToRPN(TString str)
 				}
 				else //если не число и не операция, то проверка на конец строки, иначе "мусор"
 					if (str[i] != '\0')
-						throw TException("The line incorrect.");
+						throw TException("Incorrect string", "RPN.cpp", "StrToRPN", 3);
 	} //конец цикла for, обработана вся входная строка
 	while (!stack.IsEmpty())
 		queue.Put(stack.Get()); //операции, оставшиеся в стеке, переносим в очередь
 	if (openCounter != closeCounter)
-		throw TException("The number of open and closed brackets does not match.");
+		throw TException("Incorrect use of '(' and ')'", "RPN.cpp", "StrToRPN", 2);
 	return queue;
 }
 
