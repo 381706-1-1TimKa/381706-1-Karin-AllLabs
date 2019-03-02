@@ -9,5 +9,22 @@ script:
   - cmake ../381706-1-Karin-AllLabs
   - make -j
   - ./Vector/Vector
+  - ./VectorTest/VectorTest
+  - ./Stack/Stack
+  - ./StackTest/StackTest
+  - ./Queue/Queue
+  - ./QueueTest/QueueTest
+  - ./StOnList/StOnList
+  - ./StOnListTest/StOnListTest
+  - ./MasList/MasList
+  - ./MasListTest/MasListTest
+  - ./MStack/MStack
+  - ./MStackTest/MStackTest
+  - ./List/List
+  - ./ListTest/ListTest
+  - ./Polynom/Polynom
+  - ./PolynomTest/PolynomTest
+  - ./RPN/RPN
+  - ./RPNTest/RPNTest
 notifications:
   email: false
