@@ -39,6 +39,11 @@ set (RPN RPN)
 set (RPNLib RPNLib)
 set (RPNTest RPNTest)
 
+set (Text Text)
+set (TextLib TextLib)
+set (TextTest TextTest)
+
+
 set (Exception Exception)
 
 
@@ -99,5 +104,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/RPNLib)
 add_subdirectory (RPN)
 add_subdirectory (RPNLib)
 add_subdirectory (RPNTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/TextLib)
+add_subdirectory (Text)
+add_subdirectory (TextLib)
+add_subdirectory (TextTest)
+
 
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}

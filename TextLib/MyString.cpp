@@ -1,13 +1,13 @@
-#include "../RPNLib/MyString.h"
+#include "../TextLib/MyString.h"
 
 
-TString::TString()
+TMyString::TMyString()
 {
 	str = 0;
 	len = 0;
 }
 
-TString::TString(TString& _str)
+TMyString::TMyString(TMyString& _str)
 {
 	len = _str.len;
 	if (_str.len == 0)
@@ -20,7 +20,7 @@ TString::TString(TString& _str)
 	}
 }
 
-TString::TString(char* ch)
+TMyString::TMyString(char* ch)
 {
 	if (ch == 0)
 		throw 1;
@@ -39,7 +39,7 @@ TString::TString(char* ch)
 		str[i] = ch[i];
 }
 
-TString::~TString()
+TMyString::~TMyString()
 {
 	if (len != 0)
 		delete str;
@@ -47,12 +47,12 @@ TString::~TString()
 	len = 0;
 }
 
-int TString::GetLength()
+int TMyString::GetLength()
 {
 	return len;
 }
 
-TString& TString::operator=(const TString& _str)
+TMyString& TMyString::operator=(const TMyString& _str)
 {
 	if (this == &_str)
 		return *this;
@@ -72,9 +72,9 @@ TString& TString::operator=(const TString& _str)
 	return *this;
 }
 
-TString TString::operator+(TString& _str)
+TMyString TMyString::operator+(TMyString& _str)
 {
-	TString Res;
+	TMyString Res;
 	Res.len = len + _str.len - 1;
 	Res.str = new char[Res.len];
 	for (int i = 0; i < len - 1; i++)
@@ -84,14 +84,14 @@ TString TString::operator+(TString& _str)
 	return Res;
 }
 
-char& TString::operator[] (int i)
+char& TMyString::operator[] (int i)
 {
 	if ((i < 0) || (i >= len))
 		throw 1;
 	return str[i];
 }
 
-std::istream& operator>>(std::istream &is, TString &string)
+std::istream& operator>>(std::istream &is, TMyString &string)
 {
 	char s[256];
 	is >> s;
@@ -111,7 +111,7 @@ std::istream& operator>>(std::istream &is, TString &string)
 	return is;
 }
 
-	std::ostream& operator<<(std::ostream &os, const TString &string)
+	std::ostream& operator<<(std::ostream &os, const TMyString &string)
 	{
 		os << string.str;
 		return os;

@@ -26,5 +26,7 @@ script:
   - ./PolynomTest/PolynomTest
   - ./RPN/RPN
   - ./RPNTest/RPNTest
+  - ./Text/Text
+  - ./TextTest/TextTest
 notifications:
   email: false
