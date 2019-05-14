@@ -43,6 +43,27 @@ set (Text Text)
 set (TextLib TextLib)
 set (TextTest TextTest)
 
+set (Plex Plex)
+set (PlexLib PlexLib)
+set (PlexTest PlexTest)
+
+set (ScanTable ScanTable)
+set (ScanTableLib ScanTableLib)
+set (ScanTableTest ScanTableTest)
+
+set (SortTable SortTable)
+set (SortTableLib SortTableLib)
+set (SortTableTest SortTableTest)
+
+set (TreeTable TreeTable)
+set (TreeTableLib TreeTableLib)
+set (TreeTableTest TreeTableTest)
+
+
+set (HashTable HashTable)
+set (HashTableLib HashTableLib)
+set (HashTableTest HashTableTest)
+
 
 set (Exception Exception)
 
@@ -110,5 +131,30 @@ add_subdirectory (Text)
 add_subdirectory (TextLib)
 add_subdirectory (TextTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PlexLib)
+add_subdirectory (Plex)
+add_subdirectory (PlexLib)
+add_subdirectory (PlexTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ScanTableLib)
+add_subdirectory (ScanTable)
+add_subdirectory (ScanTableLib)
+add_subdirectory (ScanTableTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/SortTableLib)
+add_subdirectory (SortTable)
+add_subdirectory (SortTableLib)
+add_subdirectory (SortTableTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/TreeTableLib)
+add_subdirectory (TreeTable)
+add_subdirectory (TreeTableLib)
+add_subdirectory (TreeTableTest)
+
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/HashTableLib)
+add_subdirectory (HashTable)
+add_subdirectory (HashTableLib)
+add_subdirectory (HashTableTest)
 
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}

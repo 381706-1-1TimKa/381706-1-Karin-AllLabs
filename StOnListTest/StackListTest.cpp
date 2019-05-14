@@ -18,16 +18,6 @@ TEST(StackList, copy_constructor)
 }
 
 
-TEST(StackList, Get_size_is_work) {
-	TStackList<double> S;
-	S.Put(5);
-	S.Put(5);
-	S.Put(5);
-	S.Put(5);
-	S.Put(5);
-	ASSERT_EQ(S.GetSize(), 5);
-}
-
 TEST(StackList, IsEmpty_is_work) {
 	TStackList<double> S;
 	S.Put(5);

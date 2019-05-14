@@ -1,6 +1,6 @@
 #include "Node.h"
-#include "Stack.h"
-#include "Exception.h"
+#include "../StOnListLib/StackList.h"
+#include "../Exception/Exception.h"
 using namespace std;
 // такое должно быть обязательно в другом файле в юникс. Под вин можно в одном писать
 
@@ -12,6 +12,7 @@ int TNode::sizeMas = 0;
 
 TNode::TNode(char c)
 {
+	Init(200000);
 	nextLevel = NULL;
 	sosed = NULL;
 	level = 3; 
@@ -20,6 +21,7 @@ TNode::TNode(char c)
 
 TNode::TNode(TMyString s)
 {
+	Init(200000);
 	if (s.GetLength() == 0)
 		throw TException("Inccorrect string", "Node.cpp", "TNode", 2);
 	data = 0;
@@ -36,6 +38,7 @@ TNode::TNode(TMyString s)
 
 TNode::TNode(int _level)
 {
+	Init(200000);
 	if ((_level < 0) || (_level > 3))
 		throw TException("incorrect level", "Node.cpp", "TNode", 1);
 	nextLevel = 0;
@@ -52,7 +55,7 @@ TNode::TNode(TNode& other)//очень странный конструктор копирования
 	level = other.level;
 }
 
-TNode& TNode::operator=(TNode& a)
+TNode& TNode::operator=(const TNode& a)
 {
 	data = a.data;
 	level = a.level;
@@ -66,7 +69,7 @@ TNode& TNode::operator+=(TNode& a)
 {
 	if (level < a.level)
 		throw TException("incorrect level", "Node.cpp", "operator+=", 1);
-	TStack<TNode*> st;
+	TStackList<TNode*> st;
 	st.Put(this);		//кладём в стек указатель на исходный
 	bool f = true;
 	TNode* t;
@@ -102,7 +105,7 @@ char* TNode::ToStr()
 {
 	int l = 0;
 	int j = 0;
-	TStack<TNode*> st;
+	TStackList<TNode*> st;
 	TNode* t;
 	st.Put(this);
 	while (!st.IsEmpty())//обход с целью подсчёта листов
@@ -137,8 +140,8 @@ char* TNode::ToStr()
 TNode* TNode::Clone()
 {
 	TNode* res = new TNode(*this);
-	TStack<TNode*> st;
-	TStack<TNode*> copy;
+	TStackList<TNode*> st;
+	TStackList<TNode*> copy;
 	st.Put(this);
 	copy.Put(res);
 	while (!st.IsEmpty())
@@ -214,27 +217,31 @@ void TNode::Init(int size)
 		for (int i = 1; i < size; i++)
 		{
 			int j = i * sizeof(TNode);
-			end->nextLevel = (TNode*)(&mas[j]); // умение читать код очень полезно, ибо я хз что тут происходит и просто пишу с доски :)
+			end->sosed = (TNode*)(&mas[j]); // умение читать код очень полезно, ибо я хз что тут происходит и просто пишу с доски :)
+			end = end->sosed;
 		}
-		end->nextLevel = 0;
+		end->sosed = 0;
 	}
 }
 
 void * TNode::operator new(size_t n)
 {
+	if (_free == 0)
+		GC();
 	if (_free != 0)
 	{
 		TNode* a = _free; // берем первую свободную ячейку и возвращаем ее пользователю
-		_free = _free->nextLevel; // а во фри кладет указатель на следующий
+		_free = _free->sosed; // а во фри кладет указатель на следующий
 		return a;
 	}
-	return nullptr;
+
+	return NULL;
 }
 
 void TNode::operator delete(void * a)
 {
 	TNode* t = (TNode*)(a);
-	t->nextLevel = _free; // словно в начало списка вводим еще один элемент
+	t->sosed = _free; // словно в начало списка вводим еще один элемент
 	_free = t;
 	t->data = -1;
 }
@@ -247,7 +254,7 @@ void TNode::GC()
 		int j = i * sizeof(TNode);
 		if (((TNode*)(&mas[j]))->data == '-1')
 		{
-			((TNode*)(&mas[j]))->nextLevel = _free;
+			((TNode*)(&mas[j]))->sosed = _free;
 			_free = (TNode*)(&mas[j]);
 		}
 	}

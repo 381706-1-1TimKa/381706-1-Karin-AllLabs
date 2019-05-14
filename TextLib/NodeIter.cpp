@@ -36,7 +36,7 @@ TNode* TNodeIter::operator()()
 	return cur;
 }
 
-TNodeIter& TNodeIter::operator++()
+TNodeIter& TNodeIter::operator++(int)
 {
 	return (*this)=this->GoNext();
 }

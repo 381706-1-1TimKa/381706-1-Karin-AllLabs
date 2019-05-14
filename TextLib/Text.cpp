@@ -8,23 +8,50 @@ TText::TText()
 
 char * TText::Copy(int start, int n)
 {
-
-	return nullptr;
+	char* res = new char[n];
+	bool f = false;
+	int pos = 0;
+	TNodeIter t(root);
+	while (pos != start)
+	{
+		if (t.IsEnd())
+			throw TException("incorrect values", "Text", "Copy", 5);
+		if (t()->GetLevel() == 3)
+			pos++;
+		t++;
+	}
+	pos = 0;
+	while (pos < n)
+	{
+		if (t.IsEnd())
+			throw TException("incorrect values", "Text", "Copy", 5);
+		if (t()->GetLevel() == 3)
+		{
+			res[pos] = t()->GetData();
+			pos++;
+		}
+		t++;
+	}
+	return res;
 }
 
-char * TText::Del(int start, int n)
+void TText::Del(int start, int n)
 {
-	return nullptr;
+	return;
 }
 
-void TText::Ins(TNode * start, TNode * d)
-{
+void TText::Ins(TNode* start, TNode* d)
+{ 
+	if (start->GetLevel() != d->GetLevel())
+		throw TException("different level", "Text", "Ins", 5);
+	d->SetSosed(start->GetSosed());
+	start->SetSosed(d);
 }
 
 TNode* TText::Find(char* a)
 {
 	TNodeIter i(root);
-	for (; i.IsEnd(); i.operator++())
+	for (; i.IsEnd(); i++)
 	{
 		if (i()->GetData() == a[0])
 		{
@@ -49,6 +76,7 @@ TNode* TText::Find(char* a)
 
 int TText::FindIndex(char * a)
 {
+
 	return 0;
 }
 

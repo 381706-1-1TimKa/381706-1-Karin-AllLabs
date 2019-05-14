@@ -28,5 +28,7 @@ script:
   - ./RPNTest/RPNTest
   - ./Text/Text
   - ./TextTest/TextTest
+  - ./ScanTable/ScanTable
+  - ./SortTable/SortTable
 notifications:
   email: false

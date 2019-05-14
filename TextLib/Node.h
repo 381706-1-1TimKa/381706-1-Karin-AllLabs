@@ -20,7 +20,7 @@ public:
 	TNode(TMyString s);//переделать на свой класс строки
 	TNode(int _level);
 	TNode(TNode& other);
-	TNode& operator=(TNode& a);
+	TNode& operator=(const TNode& a);
 	TNode& operator+=(TNode& a);
 	TNode& operator+=(char c);
 	TNode& operator+=(char*c);

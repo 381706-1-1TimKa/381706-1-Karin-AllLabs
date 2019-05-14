@@ -7,7 +7,7 @@ TMyString::TMyString()
 	len = 0;
 }
 
-TMyString::TMyString(TMyString& _str)
+TMyString::TMyString(const TMyString& _str)
 {
 	len = _str.len;
 	if (_str.len == 0)
@@ -20,7 +20,7 @@ TMyString::TMyString(TMyString& _str)
 	}
 }
 
-TMyString::TMyString(char* ch)
+TMyString::TMyString(const char* ch)
 {
 	if (ch == 0)
 		throw 1;
@@ -89,6 +89,18 @@ char& TMyString::operator[] (int i)
 	if ((i < 0) || (i >= len))
 		throw 1;
 	return str[i];
+}
+
+bool TMyString::operator==(TMyString Other)
+{
+	if (this->GetLength() != Other.GetLength())
+		return false;
+	for (int i = 0; i < this->GetLength(); i++)
+	{
+		if (str[i] != Other[i])
+			return false;
+	}
+	return true;
 }
 
 std::istream& operator>>(std::istream &is, TMyString &string)

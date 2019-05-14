@@ -15,5 +15,5 @@ public:
 	void Reset(); // сбросить текущую позицию и установить указатель на начало
 	bool IsEnd(); // если мы закончили, то возвращает правду
 	TNode* operator() ();
-	TNodeIter& operator++ ();
+	TNodeIter& operator++ (int);
 };

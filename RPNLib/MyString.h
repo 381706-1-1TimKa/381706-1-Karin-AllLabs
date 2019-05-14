@@ -16,6 +16,10 @@ public:
 	TString operator+(TString& _str);
 	char& operator[] (int i);
 
+	bool operator==(TString& _str);
+	bool operator>(TString& _str);
+	bool operator<(TString& _str);
+
 	friend std::istream& operator>>(std::istream &is, TString& str);
 	friend std::ostream& operator<<(std::ostream &os, const TString& str);
 };
