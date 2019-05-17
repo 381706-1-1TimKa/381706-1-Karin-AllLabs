@@ -68,7 +68,7 @@ TSortTable<T>::TSortTable(TString* keys, T* dataes, int _size, int sort)
 }
 
 template <class T>
-TSortTable<T>::TSortTable(int s = 10)
+TSortTable<T>::TSortTable(int s)
 {
 	if (s <= 0)
 		throw TException("negative size", "SortTable.h", "TSortTable", 1);

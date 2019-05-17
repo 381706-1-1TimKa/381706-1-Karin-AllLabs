@@ -23,7 +23,7 @@ public:
 };
 
 template <class T>
-TScanTable<T>::TScanTable(int n = 0)
+TScanTable<T>::TScanTable(int n)
 {
 	if (n <= 0)
 		throw TException("negative size", "ScanTable", "TScanTable", 1);
