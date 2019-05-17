@@ -30,7 +30,8 @@ TScanTable<T>::TScanTable(int n)
 	mas = new TScanElem<T>[n];
 	size = n;
 	count = 0;
-	not_find.SetKey("not_find");
+	TString not_find("not_find");
+	not_find.SetKey(not_find);
 }
 
 template <class T>
@@ -41,7 +42,8 @@ TScanTable<T>::TScanTable(TScanTable<T>& A)
 	mas = new TScanElem<T>[size];
 	for (int i = 0; i < size; i++)
 		mas[i] = A.mas[i];
-	not_find.SetKey("not_find");
+	TString not_find("not_find");
+	not_find.SetKey(not_find);
 }
 
 template <class T>
@@ -72,7 +74,8 @@ void TScanTable<T>::Del(TString k)
 		throw TException("Element isn't exist", "ScanTable", "Del", 3);
 	mas[tmp] = mas[count - 1];
 	mas[count - 1].SetData((T)0);
-	mas[count - 1].SetKey("noname");
+	TString noname("noname");
+	mas[count - 1].SetKey(noname);
 	count--;
 }
 

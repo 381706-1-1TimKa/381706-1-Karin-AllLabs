@@ -45,7 +45,8 @@ TSortTable<T>::TSortTable(TString* keys, T* dataes, int _size, int sort)
 	size = _size;
 	mas = new TSortElem<T>[size];
 	count = 0;
-	not_find.SetKey("not_find");
+	TString not_find("not_find");
+	not_find.SetKey(not_find);
 	for (int i = 0; i < size; i++)
 	{
 		mas[i] = TSortElem<T>(keys[i], dataes[i]);
@@ -75,7 +76,8 @@ TSortTable<T>::TSortTable(int s)
 	size = s;
 	count = 0;
 	mas = new TSortElem<T>[size];
-	not_find.SetKey("not_find");
+	TString not_find("not_find");
+	not_find.SetKey(not_find);
 }
 
 template <class T>
@@ -86,7 +88,8 @@ TSortTable<T>::TSortTable(TSortTable<T>& ST)
 	mas = new TSortElem<T>[size];
 	for (int i = 0; i < size; i++)
 		mas[i] = ST.mas[i];
-	not_find.SetKey("not_find");
+	TString not_find("not_find");
+	not_find.SetKey(not_find);
 }
 
 template <class T>
@@ -157,7 +160,8 @@ void TSortTable<T>::Del(TString k)
 		{
 			for (int i = cur; i < count - 1; i++)
 				mas[i] = mas[i + 1];
-			mas[count - 1].SetKey("noname");
+			TString noname("noname);
+			mas[count - 1].SetKey(noname);
 			count--;
 			if (count < size/2)
 				Resize (size / 2);

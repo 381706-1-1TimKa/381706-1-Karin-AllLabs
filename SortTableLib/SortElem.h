@@ -32,7 +32,8 @@ public:
 template<class T>
 TSortElem<T>::TSortElem()
 {
-	key = "noname";
+	TString noname("noname");
+	key = noname;
 	data = 0;
 }
 
