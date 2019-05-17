@@ -3,7 +3,8 @@
 
 TEST(SortElem, can_create)
 {
-	ASSERT_NO_THROW(TSortElem<int> A("key", 12));
+	TString key("key");
+	ASSERT_NO_THROW(TSortElem<int> A(key, 12));
 }
 
 TEST(SortElem, can_compare)
@@ -53,11 +54,11 @@ TEST(SortTable, Bubble_sort_is_right)
 	TString five("five");
 	TString S[] = { one, two, three, four, five };
 	TSortTable<int> ST(S, p, 5, 1);
-	ASSERT_TRUE(ST[0].GetKey() == (TString)"five");
-	ASSERT_TRUE(ST[1].GetKey() == (TString)"four");
-	ASSERT_TRUE(ST[2].GetKey() == (TString)"one");
-	ASSERT_TRUE(ST[3].GetKey() == (TString)"three");
-	ASSERT_TRUE(ST[4].GetKey() == (TString)"two");
+	ASSERT_TRUE(ST[0].GetKey() == five);
+	ASSERT_TRUE(ST[1].GetKey() == four);
+	ASSERT_TRUE(ST[2].GetKey() == one);
+	ASSERT_TRUE(ST[3].GetKey() == three);
+	ASSERT_TRUE(ST[4].GetKey() == two);
 }
 
 TEST(SortTable, Insert_sort_is_right)
