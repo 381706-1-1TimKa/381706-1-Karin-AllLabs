@@ -78,11 +78,11 @@ int main()
 	TString key2("like");
 	ST.Put(key2, 2);
 	cout << "Add key write, data 3" << endl;
-	TString key3 = (char*)"write";
+	TString key3 ("write");
 	ST.Put(key3, 3);
 	cout << "Add key code, data 4" << endl;
-	TString key4 = (char*) "code";
-	ST.Put("code", 4);
+	TString key4 ("code");
+	ST.Put(key4, 4);
 	cout << "Print table" << endl;
 	cout << ST << endl;
 	cout << "Delete i" << endl;
