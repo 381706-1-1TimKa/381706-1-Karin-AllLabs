@@ -9,7 +9,7 @@ protected:
 	unsigned size;
 	unsigned count;
 public:
-	const TScanElem<T> not_find;
+	TScanElem<T> not_find;
 	TScanTable(int n = 0);
 	TScanTable(TScanTable<T>& A);
 	void Put(TString k, T d);
