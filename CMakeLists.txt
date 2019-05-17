@@ -55,14 +55,14 @@ set (SortTable SortTable)
 set (SortTableLib SortTableLib)
 set (SortTableTest SortTableTest)
 
-set (TreeTable TreeTable)
-set (TreeTableLib TreeTableLib)
-set (TreeTableTest TreeTableTest)
+#set (TreeTable TreeTable)
+#set (TreeTableLib TreeTableLib)
+#set (TreeTableTest TreeTableTest)
 
 
-set (HashTable HashTable)
-set (HashTableLib HashTableLib)
-set (HashTableTest HashTableTest)
+#set (HashTable HashTable)
+#set (HashTableLib HashTableLib)
+#set (HashTableTest HashTableTest)
 
 
 set (Exception Exception)
@@ -146,15 +146,15 @@ add_subdirectory (SortTable)
 add_subdirectory (SortTableLib)
 add_subdirectory (SortTableTest)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/TreeTableLib)
-add_subdirectory (TreeTable)
-add_subdirectory (TreeTableLib)
-add_subdirectory (TreeTableTest)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/TreeTableLib)
+#add_subdirectory (TreeTable)
+#add_subdirectory (TreeTableLib)
+#add_subdirectory (TreeTableTest)
 
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/HashTableLib)
-add_subdirectory (HashTable)
-add_subdirectory (HashTableLib)
-add_subdirectory (HashTableTest)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/HashTableLib)
+#add_subdirectory (HashTable)
+#add_subdirectory (HashTableLib)
+#add_subdirectory (HashTableTest)
 
 #target_link_libraries(${PROJECT_NAME} ${MyLib1}) #Подключаем к проекту с именем ${PROJECT_NAME} библиотеку с именем ${MyLib1}

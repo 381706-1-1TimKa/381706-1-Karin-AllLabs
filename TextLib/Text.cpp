@@ -1,4 +1,5 @@
 #include "Text.h"
+using namespace std;
 
 
 TText::TText()
@@ -71,7 +72,7 @@ TNode* TText::Find(char* a)
 				return i();
 		}
 	}
-	return nullptr;
+	return NULL;
 }
 
 int TText::FindIndex(char * a)
