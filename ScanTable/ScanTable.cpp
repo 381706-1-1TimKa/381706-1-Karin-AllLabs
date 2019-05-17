@@ -72,11 +72,11 @@ int main()
 	cout << "Creating table" << endl;
 	TScanTable<int> ST(10);
 	cout << "Add key i, data 1" << endl;
-	char key1[] = "i";
-	ST.Put((TString)key1, 1);
+	TString key1 ("i");
+	ST.Put(key1, 1);
 	cout << "Add key like, data 2" << endl;
-	char key2[] = "like";
-	ST.Put((TString)key2, 2);
+	TString key2("like");
+	ST.Put(key2, 2);
 	cout << "Add key write, data 3" << endl;
 	TString key3 = (char*)"write";
 	ST.Put(key3, 3);
