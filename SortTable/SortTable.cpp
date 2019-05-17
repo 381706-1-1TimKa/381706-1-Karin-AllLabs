@@ -74,25 +74,36 @@ int main()
 	cout << "The example of using" << endl;
 	cout << "For Travis" << endl;
 	TSortTable<int> A;
-	A.Put("one", 1);
-	A.Put("two", 2);
-	A.Put("three", 3);
+	TString one("one");
+	A.Put(one, 1);
+	TString two("two");
+	A.Put(two, 2);
+	TString three("three");
+	A.Put(three, 3);
 	cout << A;
 	cout << "Searching ""three""" << endl;
-	cout << A.Search("three") << endl;
+	cout << A.Search(three) << endl;
 
 	cout << endl<< "New Table" << endl;
 	cout << "keys: one, two, three, four, five, six, seven, eight" << endl;
 	cout << "data: 1, 2, 3, 4, 5, 6, 7, 8"<<endl;
 	cout << "with Quick Sort" << endl;
-	TString key[] = { "one", "two", "three", "four", "five", "six", "seven", "eight"};
+	TString one("one");
+	TString two("two");
+	TString three("three");
+	TString four("four");
+	TString five("five");
+	TString six("six");
+	TString seven("seven");
+	TString eight("eight");
+	TString key[] = { one, two, three, four, five, six, seven, eight};
 	int data[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
 	TSortTable<int> B(key, data, 8, 3);
 	cout << B << endl << endl;
 	
 
 	cout << "Delete four" << endl;
-	B.Del("four");
+	B.Del(four);
 	cout << B << endl;
 	return 0;
 }
