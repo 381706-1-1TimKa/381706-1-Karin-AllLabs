@@ -30,8 +30,8 @@ TScanTable<T>::TScanTable(int n)
 	mas = new TScanElem<T>[n];
 	size = n;
 	count = 0;
-	TString not_find("not_find");
-	not_find.SetKey(not_find);
+	TString notfind("not_find");
+	not_find.SetKey(notfind);
 }
 
 template <class T>
@@ -42,8 +42,8 @@ TScanTable<T>::TScanTable(TScanTable<T>& A)
 	mas = new TScanElem<T>[size];
 	for (int i = 0; i < size; i++)
 		mas[i] = A.mas[i];
-	TString not_find("not_find");
-	not_find.SetKey(not_find);
+	TString notfind("not_find");
+	not_find.SetKey(notfind);
 }
 
 template <class T>
