@@ -32,7 +32,7 @@ public:
 template<class T>
 TScanElem<T>::TScanElem()
 {
-	Tstring noname("noname");
+	TString noname("noname");
 	key = noname;
 	data = (T)0;
 }

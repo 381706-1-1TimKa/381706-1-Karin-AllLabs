@@ -49,7 +49,8 @@ TSortTable<T>::TSortTable(TString* keys, T* dataes, int _size, int sort)
 	not_find.SetKey(notfind);
 	for (int i = 0; i < size; i++)
 	{
-		mas[i] = TSortElem<T>(keys[i], dataes[i]);
+		TSortElem<T> tmp(keys[i], dataes[i]);
+		mas[i] = tmp;
 		count++;
 	}
 	switch (sort)
