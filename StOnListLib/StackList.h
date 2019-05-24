@@ -11,6 +11,7 @@ public:
 	TStackList<T>(TStackList<T> &A);
 	void Put(T A);
 	T Get();
+	int GetCount();
 	bool IsEmpty();
 };
 
@@ -37,6 +38,12 @@ T TStackList<T>::Get() {
 	T temp;
 	temp = mas.GetBegin();
 	return temp;
+}
+
+template <class T>
+int TStackList<T>::GetCount()
+{
+	return mas.GetCount();
 }
 
 template <class T>

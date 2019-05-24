@@ -104,32 +104,98 @@ void TPlex::Add(TPoint* A, TPoint* B)
 	}
 }
 
-//void TPlex::Show()
-//{
-//	if ((left == 0) && (right == 0))
-//		throw TException("Empty plex", "Plex", "Show", 2);
-//	TStackList<TPlex*> plex;
-//	TStackList<TPoint*> point;
-//	TPlex* pr;
-//	TPlex* pl;
-//	TPoint* tr = NULL;
-//	TPoint* tl = NULL;
-//	TPlex* cur = this;
-//	plex.Put(cur);
-//	while (!(plex.IsEmpty()))
-//	{
-//		cur = plex.Get();
-//		while (tr == NULL)
-//		{
-//			pr = dynamic_cast<TPlex*> (cur->right);
-//			pl = dynamic_cast<TPlex*>(cur->left);
-//			if (pr != 0 && pl != 0)
-//			{
-//				
-//			}
-//		}
-//	}
-//}
+void TPlex::Show()
+{
+	if (right == 0 && left == 0)
+		throw TException("Plex is empty");
+	TStackList<TPlex*> stack;
+	TStackList<TPoint*> point;
+	TPlex *pl, *pr;
+	TPlex *p = this;
+	TPoint *tl = NULL, *tr = NULL;
+	stack.Put(p);
+	while (!stack.IsEmpty())
+	{
+		p = stack.Get();
+		while (tr == NULL)
+		{
+			pr = dynamic_cast<TPlex*>(p->right);
+			pl = dynamic_cast<TPlex*>(p->left);
+			if (pr != 0 && pl != 0)
+			{
+				if (point.GetCount() % 2 == 0)
+					p = stack.Get();
+				else if (point.GetCount() == 1)
+				{
+					tr = point.Get();
+					tl = point.Get();
+				}
+				else
+				{
+					stack.Put(p);
+					stack.Put(pr);
+					stack.Put(p);
+					p = dynamic_cast<TPlex*>(pl);
+				}
+			}
+			else if (pr != NULL) //плекс, помещаем в стек
+			{
+				stack.Put(p);
+				p = dynamic_cast<TPlex*>(pr);
+			}
+			else
+			{
+				tr = p->right;
+			}
+		}
+		if (tl == NULL)
+		{
+			pl = dynamic_cast<TPlex*>(p->left);
+			if (pl != NULL)
+			{
+				stack.Put(p);
+				p = dynamic_cast<TPlex*>(pl);
+				tr = NULL;
+				stack.Put(p);
+			}
+			else
+			{
+				tl = p->left;
+			}
+		}
+		if (tr != NULL && tl != NULL)
+		{
+
+			TLine A(*tl, *tr);
+			A.Show();
+			cout << endl;
+			if (!stack.IsEmpty())
+			{
+				p = stack.Get();
+				pr = dynamic_cast<TPlex*>(p->right);
+				pl = dynamic_cast<TPlex*>(p->left);
+				TPoint *pp = tl;
+				if (pr != 0 && pl != 0)
+				{
+					point.Put(pp);
+					tl = NULL;
+					tr = NULL;
+				}
+				else if (pr != 0)
+				{
+					tr = pp;
+					tl = NULL;
+				}
+				else
+				{
+					tl = pp;
+					tr = NULL;
+				}
+				stack.Put(p);
+			}
+		}
+	}
+}
 
 TPoint* TPlex::Show(TPlex* P)
 {
@@ -140,15 +206,22 @@ TPoint* TPlex::Show(TPlex* P)
 	pr = dynamic_cast<TPlex*>(P->right);
 
 	if (pl != 0)
+	{
 		tl = Show(pl);
+		cout << endl;
+	}
 	else
 		tl = P->left;
 
 	if (pr != 0)
+	{
 		tr = Show(pr);
+		cout << endl;
+	}
 	else
 		tr = P->right;
 	TLine L(*tr, *tl);
 	L.Show();
+	cout << endl;
 	return tr;
 }

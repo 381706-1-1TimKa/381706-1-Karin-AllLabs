@@ -19,7 +19,7 @@ public:
 	void SetLeft(TPoint* L);
 
 	void Add(TPoint* A, TPoint* B);
-	//virtual void Show();
+	virtual void Show();
 	virtual TPoint* Show(TPlex* P);
 };
 

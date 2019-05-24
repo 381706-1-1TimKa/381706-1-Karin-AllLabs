@@ -17,6 +17,7 @@ public:
 	T GetBegin();
 	T GetEnd();
 	T GetElem(int ind);
+	int GetCount();
 	bool IsEmpty();
 };
 
@@ -182,6 +183,21 @@ T TList<T>::GetElem(int ind) {
 		delete b;
 		return temp;
 	}
+}
+
+template <class T>
+int TList<T>::GetCount()
+{
+	int i = 1;
+	TElem<T> *a = begin;
+	if (begin == 0)
+		return 0;
+	while (a->GetNext() != 0)
+	{
+		a = a->GetNext();
+		i++;
+	}
+	return i;
 }
 
 template <class T>
