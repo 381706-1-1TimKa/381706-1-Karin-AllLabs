@@ -93,12 +93,7 @@ TEST(RPN, can_multiplicate)
 	ASSERT_TRUE(Result(S) == 117450);
 }
 
-TEST(RPN, can_divide)
-{
-	char str[] = "56/2/7";
-	TString S(str);
-	ASSERT_TRUE(Result(S) == 4);
-}
+
 
 TEST(RPN, can_translate_to_RPN_without_parentheses_and_muli_digit_numbers)
 {
