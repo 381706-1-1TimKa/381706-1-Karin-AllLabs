@@ -20,7 +20,7 @@ TString::TString(TString& _str)
 	}
 }
 
-TString::TString(char* ch)
+TString::TString(const char* ch)
 {
 	if (ch == 0)
 		throw 1;

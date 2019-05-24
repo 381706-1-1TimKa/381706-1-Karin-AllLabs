@@ -8,7 +8,7 @@ class TString
 public:
 	TString();
 	TString(TString& _str);
-	TString(char* ch);
+	TString(const char* ch);
 	~TString();
 
 	int GetLength();
