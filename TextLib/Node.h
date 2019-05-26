@@ -17,7 +17,7 @@ protected:
 
 public:
 	TNode(char c);
-	TNode(TMyString s);//переделать на свой класс строки
+	TNode(TMyString s);
 	TNode(int _level);
 	TNode(TNode& other);
 	TNode& operator=(const TNode& a);

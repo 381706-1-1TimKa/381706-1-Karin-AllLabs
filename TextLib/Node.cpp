@@ -47,7 +47,7 @@ TNode::TNode(int _level)
 	data = -1;
 }
 
-TNode::TNode(TNode& other)//очень странный конструктор копирования
+TNode::TNode(TNode& other)
 {
 	data = other.data;
 	nextLevel = other.nextLevel;
@@ -217,7 +217,7 @@ void TNode::Init(int size)
 		for (int i = 1; i < size; i++)
 		{
 			int j = i * sizeof(TNode);
-			end->sosed = (TNode*)(&mas[j]); // умение читать код очень полезно, ибо я хз что тут происходит и просто пишу с доски :)
+			end->sosed = (TNode*)(&mas[j]); 
 			end = end->sosed;
 		}
 		end->sosed = 0;
@@ -261,23 +261,3 @@ void TNode::GC()
 }
 
 
-//// _______________________________________________________________________________________________________________________________
-//// main.cpp
-////
-//#include <iostream>
-//
-//int main(int argc, char argv[])
-//{
-//	TNode tmp;
-//
-//	// пример использования итератора
-//	TNode S("stroka");
-//	for (TNodeIter i(s); i.IsEnd; i++)
-//	{
-//		std::cout << i();
-//	}
-//
-//	return 0;
-//}
-//
-//// дома нужно написать умный итератор, который не будет дважды по первому элементу шастать
