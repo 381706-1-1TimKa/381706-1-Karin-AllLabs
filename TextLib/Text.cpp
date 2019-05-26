@@ -4,10 +4,25 @@ using namespace std;
 
 TText::TText()
 {
-	root = 0;
+	root = new TNode(0);
 }
 
-char * TText::Copy(int start, int n)
+TText::TText(TNode* r)
+{
+	root = r;
+}
+
+TText::TText(TText& T)
+{
+	root = T.root->Clone();
+}
+
+TNode* TText::GetRoot()
+{
+	return root;
+}
+
+char* TText::Copy(int start, int n)
 {
 	char* res = new char[n];
 	bool f = false;
@@ -36,9 +51,64 @@ char * TText::Copy(int start, int n)
 	return res;
 }
 
-void TText::Del(int start, int n)
+void TText::Del(TNode* start, int n)
 {
-	return;
+
+	TNodeIter iter(root);
+	int i = n;
+	int count = 0;
+	bool flag = false;
+	bool nextflag = false;
+	bool sameflag = false;
+	TNode* temp1;
+	TNode* temp2;
+	TNode* temp3;
+
+	while (iter.IsEnd() != true)
+	{
+		iter++;
+		TNode* tmp = iter();
+		if (tmp->GetSosed() == start)
+		{
+			temp1 = tmp;
+			sameflag = true;
+		}
+		if (tmp->GetNextLevel() == start)
+		{
+			temp3 = tmp;
+			nextflag = true;
+		}
+		if (tmp == start)
+		{
+			delete tmp;
+			i--;
+			flag = true;
+		}
+		else if (flag == true && tmp->GetLevel() == 3)
+		{
+			if (i == 1)
+				temp2 = tmp->GetSosed();
+			delete tmp;
+			i--;
+		}
+		if (i == 0)
+			break;
+	}
+	if (nextflag == true)
+		temp3->SetNextLevel(temp2);
+	if (sameflag == true)
+		temp1->SetNextLevel(temp2);
+		
+}
+
+int TText::GetCount()
+{
+	TNodeIter i(root);
+	int count = 0;
+	for (; !(i.IsEnd()); i++)
+		if (i()->GetLevel() == 3)
+			count++;
+	return count;
 }
 
 void TText::Ins(TNode* start, TNode* d)
@@ -49,10 +119,65 @@ void TText::Ins(TNode* start, TNode* d)
 	start->SetSosed(d);
 }
 
+void TText::Ins(TNode* start, TMyString S)
+{
+	if (start->GetLevel() == 3)
+		throw TException("different level", "Text", "Ins", 5);
+	TNode* N = new TNode(S);
+	if (start->GetLevel() == 0)
+	{
+		if (start->GetNextLevel() == 0)
+			start->SetNextLevel(new TNode(1));
+		start = start->GetNextLevel();
+	}
+	if (start->GetLevel() == 1)
+	{
+		if (start->GetNextLevel() == 0)
+		{
+			start->SetNextLevel(N);
+			return;
+		}
+		start = start->GetNextLevel();
+	}
+	N->SetSosed(start->GetSosed());
+	start->SetSosed(N);
+}
+
+void TText::Ins(TNode* start, char c)
+{
+	if (start->GetLevel() != 3)
+		throw TException("different level", "Text", "Ins", 5);
+	TNode* N = new TNode(c);
+	if (start->GetLevel() == 0)
+	{
+		if (start->GetNextLevel() == 0)
+			start->SetNextLevel(new TNode(1));
+		start = start->GetNextLevel();
+	}
+	if (start->GetLevel() == 1)
+	{
+		if (start->GetNextLevel() == 0)
+			start->SetNextLevel(new TNode(1));
+		start = start->GetNextLevel();
+	}
+	if (start->GetLevel() == 2)
+	{
+		if (start->GetNextLevel() == 0)
+		{
+			start->SetNextLevel(N);
+			return;
+		}
+		start = start->GetNextLevel();
+
+	}
+	N->SetSosed(start->GetSosed());
+	start->SetSosed(N);
+}
+
 TNode* TText::Find(char* a)
 {
 	TNodeIter i(root);
-	for (; i.IsEnd(); i++)
+	for (; !(i.IsEnd()); i++)
 	{
 		if (i()->GetData() == a[0])
 		{
@@ -77,7 +202,50 @@ TNode* TText::Find(char* a)
 
 int TText::FindIndex(char * a)
 {
-
-	return 0;
+	int k = -1;
+	TNodeIter i(root);
+	for (; !(i.IsEnd()); i++)
+	{
+		if (i()->GetLevel() == 3)
+			k++;
+		if (i()->GetData() == a[0])
+		{
+			bool f = true;
+			TNodeIter j = i;
+			int t = 1;
+			while ((!(j.IsEnd())) && (a[t] != '\0'))
+			{
+				if (j()->GetData() != a[t])
+				{
+					f = false;
+					break;
+				}
+				t++;
+			}
+			if (f = true)
+				return k;
+		}
+	}
+	return -1;
 }
 
+ostream& operator<<(ostream& ostr, const TText &T)
+{
+	TNodeIter i(T.root);
+	for (int k = 0; k < 3; k++)
+	{
+		if (i()->GetNextLevel() == 0)
+			return ostr;
+		i++;
+	}
+	for (; !(i.IsEnd()); i++)
+	{
+		if ((i()->GetLevel() == 3) && (i()->GetData() != -1))
+			ostr << i()->GetData();
+		else if ((i()->GetLevel() == 2) && (i()->GetSosed() != 0) && (i()->GetLevel()!= 0))
+			ostr << " ";
+		else if (i()->GetLevel() == 1)
+			ostr << endl;
+	}
+	return ostr;
+}

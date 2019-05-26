@@ -138,7 +138,7 @@ void TPlex::Show()
 					p = dynamic_cast<TPlex*>(pl);
 				}
 			}
-			else if (pr != NULL) //плекс, помещаем в стек
+			else if (pr != NULL)
 			{
 				stack.Put(p);
 				p = dynamic_cast<TPlex*>(pr);
