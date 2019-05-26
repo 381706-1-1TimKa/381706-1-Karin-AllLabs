@@ -26,5 +26,11 @@ script:
   - ./PolynomTest/PolynomTest
   - ./RPN/RPN
   - ./RPNTest/RPNTest
+  - ./Text/Text
+  - ./TextTest/TextTest
+  - ./ScanTable/ScanTable
+  - ./SortTable/SortTable
+  - ./Plex/Plex
+  - ./PlexTest/PlexTest
 notifications:
   email: false

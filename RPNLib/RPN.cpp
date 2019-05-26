@@ -30,7 +30,7 @@ bool IsOperation(char c)
 
 TQueue<char> StrToRPN(TString str)
 {
-	int openCounter = 0, closeCounter = 0;
+	int parentheses = 0;
 	TQueue<char> queue(str.GetLength() * 3); //выделение памяти "с запасом, т.к. вводим дополнительные символы, для разграничения чисел"
 	TStack<char> stack(str.GetLength() * 3);
 	for (int i = 0; i < str.GetLength(); i++)
@@ -64,7 +64,7 @@ TQueue<char> StrToRPN(TString str)
 			{
 				stack.Put(str[i]);
 				if (str[i] == '(')
-					openCounter++;
+					parentheses++;
 				if (str[i] == ')')
 					throw TException("Incorrect use of '(' and ')'", "RPN.cpp", "StrToRPN", 2);
 			}
@@ -74,12 +74,12 @@ TQueue<char> StrToRPN(TString str)
 					if (str[i] == '(')
 					{
 						stack.Put(str[i]);
-						openCounter++;
+						parentheses++;
 					}
 					else
 						if (str[i] == ')')
 						{
-							closeCounter++;
+							parentheses--;
 							while (stack.Top() != '(')
 								queue.Put(stack.Get()); //операции из стека переносим в очередь
 							stack.Get(); //вытаскиваем открывающую скобку из стека
@@ -104,7 +104,7 @@ TQueue<char> StrToRPN(TString str)
 	} //конец цикла for, обработана вся входная строка
 	while (!stack.IsEmpty())
 		queue.Put(stack.Get()); //операции, оставшиеся в стеке, переносим в очередь
-	if (openCounter != closeCounter)
+	if (parentheses != 0)
 		throw TException("Incorrect use of '(' and ')'", "RPN.cpp", "StrToRPN", 2);
 	return queue;
 }

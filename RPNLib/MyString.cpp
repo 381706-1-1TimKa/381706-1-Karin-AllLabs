@@ -1,4 +1,4 @@
-#include "MyString.h"
+#include "../RPNLib/MyString.h"
 
 
 TString::TString()
@@ -20,7 +20,7 @@ TString::TString(TString& _str)
 	}
 }
 
-TString::TString(char* ch)
+TString::TString(const char* ch)
 {
 	if (ch == 0)
 		throw 1;
@@ -60,14 +60,14 @@ TString& TString::operator=(const TString& _str)
 	{
 		delete[] str;
 		len = _str.len;
+		if (len != 0)
+			str = new char[len];
+		else
+			return *this;
 	}
-	if (len != 0)
+	for (int i = 0; i < len; i++)
 	{
-		str = new char[len];
-		for (int i = 0; i < len; i++)
-		{
-			str[i] = _str.str[i];
-		}
+		str[i] = _str.str[i];
 	}
 	return *this;
 }
@@ -90,6 +90,46 @@ char& TString::operator[] (int i)
 		throw 1;
 	return str[i];
 }
+
+bool TString::operator==(TString& _str)
+{
+	if (len != _str.len)
+		return false;
+	for (int i = 0; i < len; i++)
+		if (str[i] != _str.str[i])
+			return false;
+	return true;
+}
+
+bool TString::operator>(TString& _str)
+{
+	int minlen;
+	if (len < _str.len)
+		minlen = len;
+	else
+		minlen = _str.len;
+	for (int i = 0; i < minlen-1; i++)
+	{
+		if (str[i] < _str.str[i])
+			return false;
+		if (str[i] > _str.str[i])
+			return true;
+	}
+	if (len == _str.len)
+		return false;
+	if (minlen == len)
+		return true;
+	else
+		return false;
+}
+
+bool TString::operator<(TString& _str)
+{
+	if (*this == _str)
+		return false;
+	return !(*this > _str);
+}
+
 
 std::istream& operator>>(std::istream &is, TString &string)
 {

@@ -6,30 +6,26 @@ template <class T>
 class TStackList {
 protected:
 	TList<T> mas;
-	int count;
 public:
 	TStackList<T>();
 	TStackList<T>(TStackList<T> &A);
 	void Put(T A);
 	T Get();
-	int GetSize();
+	int GetCount();
 	bool IsEmpty();
 };
 
 template <class T>
 TStackList<T>::TStackList() {
-	count = 0;
 }
 
 template <class T>
 TStackList<T>::TStackList(TStackList<T> &A): mas(A.mas){
-	count = A.count;
 }
 
 template <class T>
 void TStackList<T>::Put(T A) {
 	mas.PutBegin(A);
-	count++;
 }
 
 template <class T>
@@ -41,18 +37,16 @@ T TStackList<T>::Get() {
 	}
 	T temp;
 	temp = mas.GetBegin();
-	count--;
 	return temp;
 }
 
 template <class T>
-int TStackList<T>::GetSize() {
-	return count;
+int TStackList<T>::GetCount()
+{
+	return mas.GetCount();
 }
 
 template <class T>
 bool TStackList<T>::IsEmpty() {
-	if (count == 0) 
-		return true;
-	return false;
+	return mas.IsEmpty();
 }
